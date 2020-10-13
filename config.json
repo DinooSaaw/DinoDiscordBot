@@ -1,0 +1,6 @@
+{
+    "prefix": "PREFIX",
+    "token": "TOKEN",
+    "owners": ["OWNER"],
+    "defaultPerms": ["DEFAULTPERMS"]
+}
