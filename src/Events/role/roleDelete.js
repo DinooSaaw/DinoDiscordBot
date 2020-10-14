@@ -4,12 +4,6 @@ const chalk = require('chalk');
 
 module.exports = class extends Event {
 
-	constructor(...args) {
-		super(...args, {
-			once: true
-		});
-	}
-
 	run(Role) {
         const channel = Role.guild.channels.cache.find(ch => ch.name == 'log');
         console.log(chalk.hex('f69aeb')('[ROLE] ')+ chalk.magentaBright(`[${Role.guild.name}] `)+ chalk.green(`[${Role.name}] `)+ chalk.whiteBright(`Deleted`));

@@ -5,12 +5,6 @@ const ms = require('ms');
 
 module.exports = class extends Event {
 
-	constructor(...args) {
-		super(...args, {
-			once: true
-		});
-	}
-
 	run(invite) {
 		const channel = invite.guild.channels.cache.find(ch => ch.name == 'log');
 

@@ -6,12 +6,6 @@ const chalk = require('chalk')
 
 module.exports = class extends Event {
 
-	constructor(...args) {
-		super(...args, {
-			once: true
-		});
-	}
-
 	run(oldRole, newRole) {
         const channel = newRole.guild.channels.cache.find(ch => ch.name == 'log');
         console.log(chalk.hex('f69aeb')('[ROLE] ')+ chalk.magentaBright(`[${oldRole.guild.name}] `)+ chalk.green(`[${oldRole.name}] `) + chalk.blue(`[${oldRole.color}] `)+ chalk.whiteBright(`OldRole Update`));
