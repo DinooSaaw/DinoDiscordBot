@@ -16,7 +16,7 @@ module.exports = class extends Command {
     });
     }
    
-run(message) {
+run(message, args) {
 
     const banner = message.author.tag;
     const banned = message.mentions.members.first();

@@ -12,7 +12,7 @@ module.exports = class extends Event {
         if(!log) return;
 
         welcome.send(`${member} Has left the the server `);
-        console.log(chalk.hex('82F282')(`[SYSTEM] `) + chalk.white(`New User "${member.user.username}" has left "${member.guild.name}"` ));
+        console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.green(`[${member.guild.name}] `) + chalk.white(`User "${member.user.username}" has left`));
         const embed = new MessageEmbed()
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setColor(member.displayHexColor || 'GREEN')

@@ -10,7 +10,7 @@ module.exports = class extends Event {
 		const log = member.guild.channels.cache.find(ch => ch.name == 'log' || ch.name == 'logs');
 		
         welcome.send(`Welcome to the server ${member}`);
-		console.log(chalk.hex('82F282')(`[SYSTEM] `) + chalk.white(`New User "${member.user.username}" has joined "${member.guild.name}"` ));
+		console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.green(`[${member.guild.name}] `) + chalk.white(`User "${member.user.username}" has joined`));
 		
         const embed = new MessageEmbed()
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))

@@ -1,12 +1,9 @@
 const Event = require('../Structures/Event');
-const DinoEmbed = require('../Structures/DinoEmbed');
-const { Util: { escapeMarkdown } } = require('discord.js');
-const { diffWordsWithSpace } = require('diff');
 const chalk = require('chalk')
 
 module.exports = class extends Event {
 
 	run(channel, user) {
-        console.log(chalk.hex('82F282')(`[SYSTEM] `) + chalk.white(`${user.username} Started Typing In ${channel.guild.name} In ${channel.name}`))
+        console.log(chalk.blueBright(`[GUILD] `) +chalk.bold.green(`[${channel.guild.name}] `) + chalk.yellowBright(`${user.username} `)+chalk.white(`Started Typing In `)+ chalk.yellowBright(`${channel.name}`))
     }
 }
