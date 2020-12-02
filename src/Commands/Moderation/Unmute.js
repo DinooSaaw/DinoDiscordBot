@@ -28,6 +28,7 @@ run(message) {
     muted.roles.remove(role)
     message.channel.send(`*${muted.user.username}* was successfully unmuted.`)
     muted.send(`Hello, you have been unmuted in **${message.guild.name}** by: **${message.author.tag}**`).catch(err => console.log(err))
+    muted.voice.setMute(false)
 
     const embed = new MessageEmbed()
                 .setColor('RED')

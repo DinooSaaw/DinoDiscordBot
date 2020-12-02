@@ -4,6 +4,8 @@ const chalk = require('chalk')
 module.exports = class extends Event {
 
 	run(channel, user) {
-        console.log(chalk.blueBright(`[GUILD] `) +chalk.bold.green(`[${channel.guild.name}] `) + chalk.yellowBright(`${user.username} `)+chalk.white(`Started Typing In `)+ chalk.yellowBright(`${channel.name}`))
+        if (!channel.guild) return
+        
+        console.log(chalk.blueBright(`[GUILD] `) +chalk.bold.magentaBright(`[${channel.guild.name}] `) +chalk.bold.green(`[${channel.name}] `) + chalk.yellowBright(`${user.username} `)+chalk.white(`Started Typing `))
     }
 }

@@ -6,13 +6,38 @@ module.exports = class extends Event {
 	async run(message) {
 		const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
 		const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
+		const flags = {
+			DISCORD_EMPLOYEE: 'Discord Employee',
+			DISCORD_PARTNER: 'Discord Partner',
+			BUGHUNTER_LEVEL_1: 'Bug Hunter (Level 1)',
+			BUGHUNTER_LEVEL_2: 'Bug Hunter (Level 2)',
+			HYPESQUAD_EVENTS: 'HypeSquad Events',
+			HOUSE_BRAVERY: 'House of Bravery',
+			HOUSE_BRILLIANCE: 'House of Brilliance',
+			HOUSE_BALANCE: 'House of Balance',
+			EARLY_SUPPORTER: 'Early Supporter',
+			TEAM_USER: 'Team User',
+			SYSTEM: 'System',
+			VERIFIED_BOT: 'Verified Bot',
+			VERIFIED_DEVELOPER: 'Verified Bot Developer'
+		};
+
 
 		if (message.author.bot) return;
 
 		if (!message.guild) return console.log(chalk.yellow(`[CHAT] `) + chalk.bold.magentaBright(`[DM] `) + chalk.bold.green(`[${message.author.username}] `) + chalk.bold.white(`Said: ${message.content}`));
 		console.log(chalk.yellow(`[CHAT] `) + chalk.bold.magentaBright(`[${message.guild.name}] `) + chalk.bold.green(`[${message.channel.name}] `) + chalk.bold.white(`User: ${message.author.username} Said: ${message.content}`));
 		
-
+		let messageContext = chalk.yellow(`[CHAT] `)
+		const userFlags = message.author.flags.toArray();
+		messageContext += chalk.bold.magentaBright(`[${message.guild.name}] `)
+		messageContext += chalk.bold.green(`[${message.channel.name}] `)
+		messageContext += chalk.bold.white(`User: ${message.author.username} `)
+		messageContext += chalk.bold.green(`[${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}] `)
+		messageContext += chalk.bold.magenta(`||`)
+		messageContext += chalk.bold.white(`${message.content}`)
+		//console.log(messageContext)
+		
 		if (message.content.match(mentionRegex)) message.channel.send(`My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`);
 
 		const prefix = message.content.match(mentionRegexPrefix) ?
@@ -52,7 +77,7 @@ module.exports = class extends Event {
 
 				const botPermCheck = command.botPerms ? this.client.defaultPerms.add(command.botPerms) : this.client.defaultPerms;
 				if (botPermCheck) {
-					console.log(botPermCheck)
+					// console.log(botPermCheck)
 					const missing = message.channel.permissionsFor(this.client.user).missing(botPermCheck);
 					if (missing.length) {
 						return message.channel.send(`I am missing ${this.client.utils.formatArray(missing.map(this.client.utils.formatPerms))} permissions, I need them to run this command!`);

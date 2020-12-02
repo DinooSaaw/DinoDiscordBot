@@ -33,6 +33,7 @@ module.exports = class extends Command {
     muted.roles.add(role)
     message.channel.send(`*${muted.user.username}* was successfully muted.`)
     muted.send(`Hello, you have been muted in **${message.guild.name}** by: **${message.author.tag}** for: *${reason}*`).catch(err => console.log(err))
+    muted.voice.setMute(true)
 
     const embed = new MessageEmbed()
                 .setColor('RED')

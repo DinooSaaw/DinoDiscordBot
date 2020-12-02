@@ -23,8 +23,9 @@ module.exports = class extends Command {
 
       if (!reason) return message.channel.send('Sorry, this command requires arguments to function. Usage: `!disconnect <User> <Reason>`')
       if (mMember.hasPermission("MOVE_MEMBERS")) return message.channel.send("That was a bad idea that can be taken as disrespect just saying....") 
+      if (!message.member.voice.channel) return message.channel.send(`You must be in a Voice Channel!`)
       if (!mMember.voice.channel) return message.channel.send(`${mMember.displayName} isn't in a Voice Channel!`)
-     
+      
       message.delete()
       mMember.voice.kick(reason)
       message.channel.send(`*${mMember}*   has been disconnect`)

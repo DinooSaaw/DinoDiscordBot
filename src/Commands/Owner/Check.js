@@ -21,6 +21,7 @@ module.exports = class extends Command {
         message.delete()
         if (mMember.hasPermission("MUTE_MEMBERS")) return message.channel.send("That was a bad idea that can be taken as disrespect just saying....")
         if (!mMember.voice.channel) return message.channel.send(`${mMember.displayName} isn't in a Voice Channel!`)
+        if (!message.member.voice.channel) return message.channel.send(`You must be in a Voice Channel!`)
         if (!mMember.voice.deaf) {
             if (mMember.voice.mute) {
                 message.channel.send(`Sorry ${mMember.displayName} that seems creepy just sitting there just listening .`)

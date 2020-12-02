@@ -8,7 +8,7 @@ module.exports = class extends Event {
 	run(invite) {
 		const channel = invite.guild.channels.cache.find(ch => ch.name == 'log');
 
-		console.log(chalk.hex('#509dba')(`[INVITE] `)+ chalk.magentaBright(`[${invite.guild.name}] `) + chalk.green(`[${invite.code}] `)+ chalk.whiteBright(`Deleted`));   
+		console.log(chalk.hex('#509dba')(`[INVITE] `)+ chalk.magentaBright(`[] `) + chalk.green(`[${invite.code}] `)+ chalk.whiteBright(`Deleted`));   
 	
 		const embed = new MessageEmbed()
 		.setColor('RED')

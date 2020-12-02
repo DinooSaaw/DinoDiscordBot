@@ -15,11 +15,11 @@ module.exports = class extends Command {
     }
 
     async run(message) {
-        
+        const connection = await message.member.voice.channel.join();        
         if (!message.member.voice.channel) return message.channel.send('You Must Be In Voice Channel')
-        const connection = await message.member.voice.channel.join();
-        message.delete()
         console.log(chalk.hex('#FF4C94')(`[VOICE] `) + chalk.bold.magentaBright(`[${message.guild.name}] `) + chalk.bold.green(`[${message.member.voice.channel.name}] ` + chalk.whiteBright('Joined')));
+        message.delete()
+        
     }
 
 }
