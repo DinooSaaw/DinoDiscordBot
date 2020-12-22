@@ -5,7 +5,7 @@ module.exports = class extends Command {
     
     constructor(...args) {
 		super(...args, {
-			aliases: ['discordjs', 'djs'],
+			aliases: ['discordjs', 'djs', 'docs'],
 			description: 'Displays information from the the discord.js documentation.',
 			category: 'Information',
             usage: '<searchQuery>',

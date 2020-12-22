@@ -6,10 +6,10 @@ module.exports = class extends Command {
 		super(...args, {
 			aliases: ['hallo'],
 			description: 'This is a default command',
-			category: 'Owner',
+			//category: 'Owner',
 			usage: '!hello',
 			guildOnly: true,
-			ownerOnly: true
+			//ownerOnly: true
 		});
 	}
 

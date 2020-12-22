@@ -9,7 +9,7 @@ module.exports = class extends Command {
     constructor(...args) {
 		super(...args, {
 			description: 'Slap the shit out of someone',
-			category: 'Fun',
+			category: 'Anime',
 			usage: '<@user>',
       guildOnly: true,
       args: true
