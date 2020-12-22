@@ -10,7 +10,7 @@ module.exports = class extends Command {
 			category: 'Moderation',
 			usage: '<User> <Reason>',
       userPerms: ['KICK_MEMBERS'],
-      botPerms: ['KICK_MEMBERS'],
+      botPerms: ['KICK_MEMBERS', 'MANAGE_MESSAGES'],
       guildOnly: true,
       args: true
 		});

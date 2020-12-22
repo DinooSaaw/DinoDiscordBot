@@ -27,13 +27,15 @@ module.exports = class extends Command {
     if (muted.roles.cache.some(role => role.name === 'Muted')) return  message.channel.send('You cant mute someone who is muted.')
     if (muted.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) return message.channel.send('This member cant be muted.');
     if(!role) return message.reply(' Please Setup The Muted Role.')
+    if (muted.voice.channel) return muted.voice.setMute(true)
     if (!reason) return message.channel.send('Sorry, this command requires arguments to function. Usage: `!mute <User> <Reason>`')
+
 
     message.delete()
     muted.roles.add(role)
     message.channel.send(`*${muted.user.username}* was successfully muted.`)
     muted.send(`Hello, you have been muted in **${message.guild.name}** by: **${message.author.tag}** for: *${reason}*`).catch(err => console.log(err))
-    muted.voice.setMute(true)
+    
 
     const embed = new MessageEmbed()
                 .setColor('RED')

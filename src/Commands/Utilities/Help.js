@@ -5,7 +5,7 @@ module.exports = class extends Command {
 
 	constructor(...args) {
 		super(...args, {
-			aliases: ['sendhelp'],
+			aliases: ['sendhelp', 'h'],
 			description: 'Displays all the commands in the bot',
 			category: 'Utilities',
 			usage: '[command]'
@@ -41,6 +41,11 @@ module.exports = class extends Command {
 				`Command Parameters: \`<>\` is strict & \`[]\` is optional`
 			]);
 			let categories;
+			if (!message.channel.nsfw) {
+			categories = this.client.utils.removeDuplicates(this.client.commands.filter(cmd => cmd.category !== 'NSFW').map(cmd => cmd.category));
+			} else {
+				categories = this.client.utils.removeDuplicates(this.client.commands.map(cmd => cmd.category));
+			}
 			if (!this.client.owners.includes(message.author.id)) {
 				categories = this.client.utils.removeDuplicates(this.client.commands.filter(cmd => cmd.category !== 'Owner').map(cmd => cmd.category));
 			} else {

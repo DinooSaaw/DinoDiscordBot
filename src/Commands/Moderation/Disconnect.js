@@ -7,8 +7,8 @@ module.exports = class extends Command {
 		super(...args, {
 			description: 'Disconnect  a user from a vc',
 			category: 'Moderation',
-			usage: '!disconnect <@user> <reason>',
-      //userPerms: ['MOVE_MEMBERS'],
+      usage: '!disconnect <@user> <reason>',
+      userPerms: ['MOVE_MEMBERS'],
       botPerms: ['MOVE_MEMBERS'],
       guildOnly: true,
       args: true

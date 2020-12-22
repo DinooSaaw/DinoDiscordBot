@@ -19,7 +19,6 @@ module.exports = class extends Command {
 		super(...args, {
 			description: 'Shows Memes',
 			category: 'Fun',
-			usage: '',
             guildOnly: true
 		});
 	}

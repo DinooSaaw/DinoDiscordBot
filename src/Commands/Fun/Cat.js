@@ -15,7 +15,6 @@ module.exports = class extends Command {
 		super(...args, {
 			description: 'Show Pics Of Cats',
 			category: 'Fun',
-			usage: '',
             guildOnly: true
 		});
 	}

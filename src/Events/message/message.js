@@ -1,6 +1,6 @@
 const Event = require('../../Structures/Event');
 const chalk = require('chalk')
-
+const { MessageAttachment } = require('discord.js');
 module.exports = class extends Event {
 
 	async run(message) {
@@ -59,7 +59,8 @@ module.exports = class extends Event {
 			}
 
 			if (command.nsfw && !message.channel.nsfw) {
-				return message.channel.send('Sorry, this command can only be ran in a NSFW marked channel.');
+				const attachment = new MessageAttachment('https://images-ext-2.discordapp.net/external/hiWbEzhiEXfFaza5khoxg3mR3OWeugZwWo8vGxK8LzA/https/i.imgur.com/oe4iK5i.gif');
+				return message.channel.send('Sorry, this command can only be ran in a NSFW marked channel.', attachment);
 			}
 
 			if (command.args && !args.length) {
