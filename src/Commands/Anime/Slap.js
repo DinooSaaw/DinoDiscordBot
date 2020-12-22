@@ -1,3 +1,4 @@
+  
 const { MessageEmbed } = require("discord.js");
 const client = require("nekos.life");
 const { sfw } = new client();
@@ -8,7 +9,7 @@ module.exports = class extends Command {
     constructor(...args) {
 		super(...args, {
 			description: 'Slap the shit out of someone',
-			category: 'Anime',
+			category: 'Fun',
 			usage: '<@user>',
       guildOnly: true,
       args: true
