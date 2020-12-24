@@ -8,7 +8,8 @@ module.exports = class extends Command {
 			aliases: ['sendhelp', 'h'],
 			description: 'Displays all the commands in the bot',
 			category: 'Utilities',
-			usage: '[command]'
+			usage: '[command]',
+			guildOnly: true
 		});
 	}
 

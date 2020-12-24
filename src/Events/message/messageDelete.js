@@ -21,8 +21,37 @@ module.exports = class extends Event {
 			embed.splitFields(`**❯ Deleted Message:** ${message.content}`);
 		}
 
-        console.log(chalk.yellow(`[CHAT] `) + chalk.bold.magentaBright(`[${message.guild.name}] `) + chalk.bold.green(`[${message.channel.name}] `) + chalk.bold.redBright(`User: ${message.author.username} Said: ${message.content} ${attachments ? `**❯ ${attachments.join('\n')}` : ''}`));
-		const channel = message.guild.channels.cache.find(ch => ch.name === 'log');
+        if (!message.guild) {
+			let messageContext = chalk.yellow(`[CHAT] `);
+			const userFlags = message.author.flags.toArray();
+			var color = "#FFFFFF";
+			messageContext += chalk.bold.magentaBright(`[${message.author.tag}] `);
+			messageContext +=
+			  chalk.bold.white("User: ") +
+			  chalk.bold.hex(color)(`${message.author.username} `);
+			//messageContext += chalk.bold.green(`[${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : ''}] `)
+			messageContext += chalk.bold.magenta(`|| `);
+			messageContext += chalk.bold.white(`${message.content}`);
+			console.log(messageContext);
+		  } else {
+			let messageContext = chalk.yellow(`[CHAT] `);
+			const userFlags = message.author.flags.toArray();
+			let member = message.member;
+			let color = member.displayHexColor;
+			if (color == "#000000") {
+			  color = "#FFFFFF";
+			}
+			messageContext += chalk.bold.magentaBright(`[${message.guild.name}] `);
+			messageContext += chalk.bold.green(`[${message.channel.name}] `);
+			messageContext +=
+			  chalk.bold.white("User: ") +
+			  chalk.bold.hex(color)(`${message.author.username} `);
+			//messageContext += chalk.bold.green(`[${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : ''}] `)
+			messageContext += chalk.bold.magenta(`|| `);
+			messageContext += chalk.bold.red(`${message.content}`);
+			console.log(messageContext);
+		  }
+		  const channel = message.guild.channels.cache.find(ch => ch.name === 'log');
 		//if (channel) channel.send(embed);
 	}
 
