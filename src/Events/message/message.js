@@ -1,12 +1,15 @@
 const Event = require("../../Structures/Event");
 const chalk = require("chalk");
-const { MessageAttachment } = require("discord.js");
-module.exports = class extends (
-  Event
-) {
+const moment = require('moment');
+const DBGuild = require("../../Mongoose/Schema/Guild");
+const DBUser = require("../../Mongoose/Schema/user");
+const upXP = 150000
+const { MessageAttachment, MessageEmbed } = require("discord.js");
+module.exports = class extends (Event) {
   async run(message) {
     const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
+    let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
     const flags = {
       DISCORD_EMPLOYEE: "Discord Employee",
       DISCORD_PARTNER: "Discord Partner",
@@ -24,11 +27,35 @@ module.exports = class extends (
     };
 
     if (message.author.bot) return;
+    if (message.guild) {
+      let guild = await DBGuild.findOne({ GuildId: message.guild.id, GuildName: message.guild.name });
+      if (!guild) {
+        const Guild = new DBGuild({
+          _id: `Guild:${message.guild.name}`,
+          GuildName: message.guild.name,
+          Region: message.guild.region,
+          MemberCount: message.guild.memberCount,
+          GuildId: message.guild.id,
+          OwnerId: message.guild.OwnerId,
+          Owner: message.guild.Owner,
+          partnered: message.guild.partnered,
+          PremiumTier: message.guild.PremiumTier,
+          PremiumSubscriptionCount: message.guild.PremiumSubscriptionCount,
+          verified: message.guild.verified
+        });
+        Guild.save();
+        console.log(
+          chalk.hex("3FA037")(`[DataBase] `) +
+            chalk.bold.white`New Guild Created`
+        );
+        message.channel.send('New Guild Added To System')
+      }
 
+    }
     if (!message.guild) {
       let messageContext = chalk.yellow(`[CHAT] `);
-	  const userFlags = message.author.flags.toArray();
-	  var color = "#FFFFFF";
+      const userFlags = message.author.flags.toArray();
+      var color = "#FFFFFF";
       messageContext += chalk.bold.magentaBright(`[${message.author.tag}] `);
       messageContext +=
         chalk.bold.white("User: ") +
@@ -42,11 +69,14 @@ module.exports = class extends (
       const userFlags = message.author.flags.toArray();
       let member = message.member;
       let color = member.displayHexColor;
+      let xp = Math.floor(Math.random() * 4)
+      
       if (color == "#000000") {
         color = "#FFFFFF";
       }
       messageContext += chalk.bold.magentaBright(`[${message.guild.name}] `);
       messageContext += chalk.bold.green(`[${message.channel.name}] `);
+      messageContext += chalk.bold.yellow(`[${xp}] `);
       messageContext +=
         chalk.bold.white("User: ") +
         chalk.bold.hex(color)(`${message.author.username} `);
@@ -54,6 +84,94 @@ module.exports = class extends (
       messageContext += chalk.bold.magenta(`|| `);
       messageContext += chalk.bold.white(`${message.content}`);
       console.log(messageContext);
+      if (!user) {
+        NewUserDB(message)
+      } else {
+        OldUserDB(message) 
+        // console.log(`sus`)
+      }
+      function NewUserDB(message){
+        const member = message.mentions.members.last() || message.member;
+        const User = new DBUser({
+          _id: `User:${message.author.tag}`,
+          Username: message.author.username,
+          Discriminator: message.author.discriminator,
+          id: message.author.id,
+          Tags: ['Active'],
+          xp: DBUser.xp =+ xp,
+          flags: `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
+          Created: `${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`
+        });
+        User.save();
+        console.log(chalk.hex("3FA037")(`[DataBase] `) +chalk.bold.white`New User Created`);
+        message.channel.send('New User Added To System')
+      }
+      function OldUserDB(message){
+        if (user.xp >= upXP){
+          LvUp()          
+        } else {
+          user.xp += xp
+          user.save();
+        }
+        // console.log(chalk.hex("3FA037")(`[DataBase] `) + chalk.bold.white`User Update`);
+        // message.channel.send('New User Added To System')
+      }
+      function LvUp() {
+        user.xp -= upXP;
+        user.level+=1
+        if (user.xp == 0){
+          let embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
+          .addField('Transaction', [
+            `**$1000** Has been add to your account`
+          ])
+          message.channel.send(embed)
+          user.bank =+ 1000
+          user.Tags.push('Lv1')
+          user.save()
+          
+        }
+        if (user.xp == 1){
+          let embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
+          .addField('Transaction', [
+            `**$1000** Has been add to your account`
+          ])
+          message.channel.send(embed)
+          user.bank =+ 1000
+          user.Tags.push('Lv2')
+          user.save()
+          
+        }
+        if (user.xp == 2){
+          let embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
+          .addField('Transaction', [
+            `**$1000** Has been add to your account`
+          ])
+          message.channel.send(embed)
+          user.bank =+ 1000
+          user.Tags.push('Lv3')
+          user.save()
+          
+        }
+        if (user.xp == 3){
+          let embed = new MessageEmbed()
+          .setColor('RANDOM')
+          .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
+          .addField('Transaction', [
+            `**$1000** Has been add to your account`
+          ])
+          message.channel.send(embed)
+          user.bank =+ 1000
+          user.Tags.push('Lv4')
+          user.save()
+          
+        }
+      }
     }
     if (message.content.match(mentionRegex))
       message.channel.send(

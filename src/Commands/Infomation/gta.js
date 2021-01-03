@@ -1,9 +1,5 @@
-const { MessageEmbed, version: djsversion } = require('discord.js');
-const { version } = require('../../../package.json');
+const { MessageEmbed } = require('discord.js');
 const Command = require('../../Structures/Command');
-const { utc } = require('moment');
-const os = require('os');
-const ms = require('ms');
 
 const replys = [
 	'Did you really think that would work ?!?',

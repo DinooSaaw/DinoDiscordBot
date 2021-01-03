@@ -6,6 +6,7 @@ const moment = require('moment');
 module.exports = class extends Event {
 
 	async run(member) {
+		console.log(member)
         const welcome = member.guild.channels.cache.find(ch => ch.name === 'general' || ch.name === 'welcome' || ch.name == 'log');
 		const log = member.guild.channels.cache.find(ch => ch.name == 'log' || ch.name == 'logs');
 		
@@ -28,6 +29,10 @@ module.exports = class extends Event {
 				`**❯ Server Join Date:** ${moment(member.joinedAt).format('LL LTS')}`,
 				`\u200b`
 			]);
-		log.send(embed);
+			if (!log) {
+
+			}else {
+				log.send(embed);
 		}
+	}
 }

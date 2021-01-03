@@ -15,14 +15,8 @@ module.exports = class extends Command {
 
 	// eslint-disable-next-line no-unused-vars
 	async run(message, args) {
-		const choices = [
-		'Hello!',
-		'Hey', 
-		'Help someone is talking to me!', 
-		'Whats up', 
-		'How are we today?'];
+		const choices = require("../../Assets/Text/HelloChoices.json")
 		const response = choices[Math.floor(Math.random() * choices.length)];
-
 		message.reply(` ${response}`)
 	}
 

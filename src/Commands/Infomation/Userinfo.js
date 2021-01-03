@@ -1,7 +1,8 @@
-  
 const Command = require('../../Structures/Command');
 const { MessageEmbed } = require('discord.js');
+const DBUser = require("../../Mongoose/Schema/user");
 const moment = require('moment');
+
 
 const flags = {
 	DISCORD_EMPLOYEE: 'Discord Employee',
@@ -33,6 +34,8 @@ module.exports = class extends Command {
 
 	async run(message, target) {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target) || message.member;
+		let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
+		if (!user) return
 		const roles = member.roles.cache
 			.sort((a, b) => b.position - a.position)
 			.map(role => role.toString())
@@ -45,6 +48,7 @@ module.exports = class extends Command {
 				`**❯ Username:** ${member.user.username}`,
 				`**❯ Discriminator:** ${member.user.discriminator}`,
 				`**❯ ID:** ${member.id}`,
+				`**❯ Tags:** ${user.Tags.length < 10 ? user.Tags.join(', ') : user.Tags.length > 10 ? this.client.utils.trimArray(user.Tags) : 'None'}`,
 				`**❯ Flags:** ${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`,
 				`**❯ Avatar:** [Link to avatar](${member.user.displayAvatarURL({ dynamic: true })})`,
 				`**❯ Time Created:** ${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`,
@@ -58,6 +62,11 @@ module.exports = class extends Command {
 				`**❯ Hoist Role:** ${member.roles.hoist ? member.roles.hoist.name : 'None'}`,
 				`**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
 				`\u200b`
+			])
+			.addField('Info', [
+				`**❯ Levels:** ${user.level} Level ${user.xp} Exp`,
+				`**❯ Bank Account:** $${user.bank}`,
+				`**❯ Money:** $${user.money}`,
 			]);
 		return message.channel.send(embed);
 	}

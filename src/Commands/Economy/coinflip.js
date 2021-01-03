@@ -1,5 +1,7 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js')
 const Command = require('../../Structures/Command');
+const DBUser = require("../../Mongoose/Schema/user");
+
 
 module.exports = class extends Command {
 
@@ -20,14 +22,16 @@ module.exports = class extends Command {
         let Tails = new MessageEmbed()
         .setTitle('Tails!')
         .setImage('https://media1.tenor.com/images/6d7a3ee293c118b90205aa2fb3a7f740/tenor.gif?itemid=13943297')
+        let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
+        if (!user) return
+        const args = message.content.trim().split(/ +/g);
 
     if(random === 0) {
       message.delete()
       message.channel.send(heads);
-    }
-    else {
+      }else {
       message.delete()
       message.channel.send(Tails);
     }
-}
+  }
 }

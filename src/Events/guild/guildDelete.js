@@ -1,12 +1,16 @@
 const Event = require('../../Structures/Event');
 const chalk = require('chalk');
+const DBGuild = require('../../Mongoose/Schema/Guild')
 
 module.exports = class extends Event {
 
 	async run(Guild) {
-    console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.green(`[${Guild.name}] `) + chalk.white(`${this.client.user.tag} has left `))
-    chalk.hex('82F282')(`[SYSTEM] `) + chalk.bold.white`Now In ${this.client.guilds.cache.size} Servers!`
-		chalk.hex('82F282')(`[SYSTEM] `) + chalk.bold.white`Now In ${this.client.channels.cache.size} Channels!`
-		chalk.hex('82F282')(`[SYSTEM] `) + chalk.bold.white`Now With ${this.client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} Users!`
-    }
+    // console.log(Guild)
+    let guild = await DBGuild.findOne({ GuildId: NewGuild.id, GuildName: NewGuild.name });
+    guild =  DBGuild({
+      currentlyIn: "False"
+    })
+    guild.save();
+    console.log(chalk.hex("3FA037")(`[DataBase] `) + chalk.bold.white`Upated Guild`);
+  }
 }

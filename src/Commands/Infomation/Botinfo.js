@@ -29,6 +29,7 @@ module.exports = class extends Command {
 				`**❯ Channels:** ${this.client.channels.cache.size.toLocaleString()}`,
 				`**❯ Creation Date:** ${utc(this.client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
 				'**❯ Discord Server:** https://discord.gg/B8RXzpg',
+				'**❯ GitHub:** https://github.com/DinooSaaw/DinoDiscordBot',
 				`**❯ Node.js:** ${process.version}`,
 				`**❯ Version:** v${version}`,
 				`**❯ Discord.js:** v${djsversion}`,
