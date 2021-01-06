@@ -26,8 +26,33 @@ module.exports = class extends Command {
 
     if (muted.roles.cache.some(role => role.name === 'Muted')) return  message.channel.send('You cant mute someone who is muted.')
     if (muted.hasPermission(['KICK_MEMBERS', 'BAN_MEMBERS'])) return message.channel.send('This member cant be muted.');
-    if(!role) return message.reply(' Please Setup The Muted Role.')
-    if (muted.voice.channel) return muted.voice.setMute(true)
+    if(!role) {
+      try{
+        muterole = await message.guild.createRole({
+            name: "Muted",
+            color: "#514f48",
+            permissions: []
+        })
+        message.guild.channels.forEach(async (channel, id) => {
+            await channel.overwritePermissions(muterole, {
+                SEND_MESSAGES: false,
+                ADD_REACTIONS: false,
+                SEND_TTS_MESSAGES: false,
+                ATTACH_FILES: false,
+                SPEAK: false
+            })
+        })
+    } catch(e) {
+        console.log(e.stack);
+    }
+    }
+    
+    if (muted.voice.channel){
+      muted.voice.setMute(true)
+      return
+  }
+    
+
     if (!reason) return message.channel.send('Sorry, this command requires arguments to function. Usage: `!mute <User> <Reason>`')
 
 

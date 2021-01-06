@@ -41,20 +41,19 @@ module.exports = class extends (
           )} were added to ${oldMember.displayName}.`
       );
 
-    const user = await DBUser.findOne({
-		id: oldMember.id,
-		Username: oldMember.Username,
-	});
-    user = DBUser({
+      const user = await DBUser.findOne({ id: oldMember.id, Username: oldMember.Username});
+      if (!user) {
+        return
+      } else {
+        user = DBUser({
           _id: `User:${newMember.tag}`,
           Username: newMember.username,
           Discriminator: newMember.discriminator,
           id: newMember.id,
           // flags: `${userFlags.length ? userFlags.map(flag => flags[flag]).join(', ') : 'None'}`
-	});
-    user.save();
-    console.log(
-      chalk.hex("3FA037")(`[DataBase] `) + chalk.bold.white`Upated User`
-    );
-  }
-};
+        })
+        user.save();
+        console.log(chalk.hex("3FA037")(`[DataBase] `) + chalk.bold.white`Upated User`);
+    }
+  };
+}

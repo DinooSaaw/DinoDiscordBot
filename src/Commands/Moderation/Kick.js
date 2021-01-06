@@ -21,7 +21,7 @@ run(message) {
     const kicker = message.author.tag;
     const kicked = message.mentions.members.first();
     const args = message.content.trim().split(/ +/g);
-    const reason = args[2]
+    const reason = args.slice(1).join(" ");
     const channel = message.guild.channels.cache.find(ch => ch.name == 'log');
 
     if (!reason) return message.channel.send('Sorry, this command requires arguments to function. Usage: `!kick <User> <Reason>`')
@@ -29,7 +29,7 @@ run(message) {
     
     message.delete()    
     message.channel.send(`*${kicked.user.username}* was successfully kicked.`)
-    kicked.kick();
+    kicked.kick(reason);
     kicked.send(`Hello, you have been kicked in **${message.guild.name}** by: **${message.author.tag}** for: *${reason}*`).catch(err => console.log(err))
 
     const embed = new MessageEmbed()

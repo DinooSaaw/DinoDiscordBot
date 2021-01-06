@@ -6,7 +6,7 @@ module.exports = class extends Event {
 
 	async run(oldGuild, NewGuild) {
     // console.log(NewGuild)
-        let guild = await DBGuild.findOne({ GuildId: NewGuild.id, GuildName: NewGuild.name });
+        let guild = await DBGuild.findOne({ GuildId: oldGuild.id, GuildName: oldGuild.name });
         guild =  DBGuild({
             _id: `Guild:${NewGuild.name}`,
             GuildName: NewGuild.name,

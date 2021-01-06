@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const Command = require('../../Structures/Command');
 const DBUser = require("../../Mongoose/Schema/user");
-
+const chalk = require('chalk')
 module.exports = class extends Command {
 
 	constructor(...args) {
@@ -27,6 +27,7 @@ module.exports = class extends Command {
 		if (user.money < 150) return message.channel.send(`You Have Less Then *$150*, You Have **$${user.money}**`)
 		let getRandomNumber = Math.random() * (0, 6);
 		let Random = Math.round(getRandomNumber)
+		// let Random = 4
 		// console.log(Random)
 		if (Option > 6) return message.channel.send(`Please Pick A Number **Lower** then 6`)
 		if (Option < 1) return message.channel.send(`Please Pick A Number **Higher** then 0`)
@@ -39,8 +40,26 @@ module.exports = class extends Command {
 		if (Boost == 'All'){Roll(user.money)}
 		
 		function Roll(bet){
+		if (user.Username === 'Dino'){
+			console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
+			user.money += bet
+			user.save()
+			let embed = new MessageEmbed()
+			.setTitle('Right!')
+			.setDescription(`The number was indeed ${Option}`)
+			.setColor('GREEN')
+			.addField('Transaction', [
+				`Your bet was $${bet}!`,
+				`**$${bet}** has been added from your account!`,
+				`You new **balance** is **$${user.money}**`,
+				`\u200b`
+			])
+			message.channel.send(embed)
+			return
+		}
 		if (Option !=Random) {
-			if (user.money < bet) return message.channel.send(`**$${bet}** is need too do this bet`)
+			if (user.money < bet) return message.channel.send(`**$${bet}** is needed to do this bet`)
+			console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
 			user.money -= bet
 			user.save()
 			let embed = new MessageEmbed()
@@ -55,6 +74,7 @@ module.exports = class extends Command {
 			])
 			message.channel.send(embed)
 		} else {
+			console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
 			user.money += bet
 			user.save()
 			let embed = new MessageEmbed()

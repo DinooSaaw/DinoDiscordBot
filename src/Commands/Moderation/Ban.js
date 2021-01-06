@@ -20,14 +20,14 @@ run(message, args) {
 
     const banner = message.author.tag;
     const banned = message.mentions.members.first();
-    let reason = args[1]
+    const reason = args.slice(1).join(" ");
     
     const channel = message.guild.channels.cache.find(ch => ch.name == 'log');
 
     if (!reason) return message.channel.send('Sorry, this command requires arguments to function. Usage: `!ban <User> <Reason>`')
     if (banned.hasPermission(['BAN_MEMBERS'])) return message.channel.send('This member cant be banned.');
     
-    message.delete()    
+    message.delete(reason)    
     message.channel.send(`*${banned.user.username}* Has been hit ban the **BAN** hammer.`)
     message.guild.members.ban(banned);
     banned.send(`Hello, you have been BANNED in **${message.guild.name}** by: **${message.author.tag}** for: *${reason}*`).catch(err => console.log(err))

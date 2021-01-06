@@ -28,7 +28,7 @@ module.exports = class extends (
         .setColor("#82F282")
         .setImage(slap.url);
         message.channel.send(embed);
-        console.log(member)
+        // console.log(member)
     } else console.log("error");
   }
 };

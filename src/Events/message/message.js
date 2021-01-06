@@ -3,13 +3,14 @@ const chalk = require("chalk");
 const moment = require('moment');
 const DBGuild = require("../../Mongoose/Schema/Guild");
 const DBUser = require("../../Mongoose/Schema/user");
-const upXP = 150000
+const upXP = 1000
 const { MessageAttachment, MessageEmbed } = require("discord.js");
 module.exports = class extends (Event) {
   async run(message) {
     const mentionRegex = RegExp(`^<@!?${this.client.user.id}>$`);
     const mentionRegexPrefix = RegExp(`^<@!?${this.client.user.id}> `);
     let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
+    let guild = await DBGuild.findOne({ GuildId: message.guild.id, GuildName: message.guild.name });
     const flags = {
       DISCORD_EMPLOYEE: "Discord Employee",
       DISCORD_PARTNER: "Discord Partner",
@@ -26,9 +27,9 @@ module.exports = class extends (Event) {
       VERIFIED_DEVELOPER: "Verified Bot Developer",
     };
 
-    if (message.author.bot) return;
+    if (message.author.bot) return
+    
     if (message.guild) {
-      let guild = await DBGuild.findOne({ GuildId: message.guild.id, GuildName: message.guild.name });
       if (!guild) {
         const Guild = new DBGuild({
           _id: `Guild:${message.guild.name}`,
@@ -127,12 +128,12 @@ module.exports = class extends (Event) {
             `**$1000** Has been add to your account`
           ])
           message.channel.send(embed)
-          user.bank =+ 1000
+          user.bank += 1000
           user.Tags.push('Lv1')
           user.save()
           
         }
-        if (user.xp == 1){
+        if (user.xp === 1){
           let embed = new MessageEmbed()
           .setColor('RANDOM')
           .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
@@ -140,12 +141,12 @@ module.exports = class extends (Event) {
             `**$1000** Has been add to your account`
           ])
           message.channel.send(embed)
-          user.bank =+ 1000
+          user.bank += 1000
           user.Tags.push('Lv2')
           user.save()
           
         }
-        if (user.xp == 2){
+        if (user.xp === 2){
           let embed = new MessageEmbed()
           .setColor('RANDOM')
           .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
@@ -153,12 +154,12 @@ module.exports = class extends (Event) {
             `**$1000** Has been add to your account`
           ])
           message.channel.send(embed)
-          user.bank =+ 1000
+          user.bank += 1000
           user.Tags.push('Lv3')
           user.save()
           
         }
-        if (user.xp == 3){
+        if (user.xp === 3){
           let embed = new MessageEmbed()
           .setColor('RANDOM')
           .setDescription(`**${message.author.username}** Has Leveled Up To **${user.level}**`)
@@ -166,7 +167,7 @@ module.exports = class extends (Event) {
             `**$1000** Has been add to your account`
           ])
           message.channel.send(embed)
-          user.bank =+ 1000
+          user.bank += 1000
           user.Tags.push('Lv4')
           user.save()
           
@@ -175,12 +176,12 @@ module.exports = class extends (Event) {
     }
     if (message.content.match(mentionRegex))
       message.channel.send(
-        `My prefix for ${message.guild.name} is \`${this.client.prefix}\`.`
+        `My prefix for ${message.guild.name} is \`${guild.prefix}\`.`
       );
 
     const prefix = message.content.match(mentionRegexPrefix)
       ? message.content.match(mentionRegexPrefix)[0]
-      : this.client.prefix;
+      : guild.prefix;
 
     if (!message.content.startsWith(prefix)) return;
 

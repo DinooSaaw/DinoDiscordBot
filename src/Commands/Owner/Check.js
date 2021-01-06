@@ -7,7 +7,7 @@ module.exports = class extends Command {
 		super(...args, {
 			description: 'Check if user is muted but not deafen',
 			category: 'Moderation',
-            usage: "!check <@user> [message]",
+            usage: "<@user> [message]",
             userPerms: ['DEAFEN_MEMBERS', 'MUTE_MEMBERS'],
             botPerms: ['DEAFEN_MEMBERS', 'MUTE_MEMBERS'],
             guildOnly: true,

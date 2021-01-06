@@ -1,5 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const Command = require('../../Structures/Command');
+const DBGuild = require("../../Mongoose/Schema/Guild");
+
 
 module.exports = class extends Command {
 
@@ -14,6 +16,8 @@ module.exports = class extends Command {
 	}
 
 	async run(message, command) {
+		let guild = await DBGuild.findOne({ GuildId: message.guild.id, GuildName: message.guild.name });
+		if (!guild) return
 		const embed = new MessageEmbed()
 			.setColor('BLUE')
 			.setAuthor(`${message.guild.name} Help Menu`, message.guild.iconURL({ dynamic: true }))
@@ -38,7 +42,7 @@ module.exports = class extends Command {
 		} else {
 			embed.setDescription([
 				`These are the available commands for ${message.guild.name}`,
-				`The bot's prefix is: ${this.client.prefix}`,
+				`The bot's prefix is: ${guild.prefix}`,
 				`Command Parameters: \`<>\` is strict & \`[]\` is optional`
 			]);
 			let categories;

@@ -1,6 +1,6 @@
 {
   "name": "dinodiscordbot",
-  "version": "2.0.0",
+  "version": "2.1.5",
   "description": "This is a discord bot made with node.js, and discord.js",
   "main": "src/index",
   "dependencies": {
