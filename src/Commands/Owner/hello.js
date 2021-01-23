@@ -9,7 +9,8 @@ module.exports = class extends Command {
 			//category: 'Owner',
 			usage: '!hello',
 			guildOnly: true,
-			//ownerOnly: true
+			//ownerOnly: true,
+			bugtesting: true
 		});
 	}
 

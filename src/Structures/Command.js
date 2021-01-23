@@ -15,6 +15,9 @@ module.exports = class Command {
 		this.ownerOnly = options.ownerOnly || false;
 		this.nsfw = options.nsfw || false;
 		this.args = options.args || false;
+		this.broken = options.broken || false;
+		this.bugtesting = options.bugtesting || false;
+		this.cooldown = options.cooldown || -1;
 	}
 
 	// eslint-disable-next-line no-unused-vars

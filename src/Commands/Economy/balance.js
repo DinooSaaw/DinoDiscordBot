@@ -17,7 +17,8 @@ module.exports = class extends Command {
 
 	async run(message) {
 		const member = message.mentions.members.last() || message.member;
-        let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
+		let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
+		let networth = user.money + user.bank
 		if (!user) return
 		const embed = new MessageEmbed()
         .setColor('RANDOM')
@@ -25,7 +26,8 @@ module.exports = class extends Command {
         .setFooter(``)
         .addField(`Money`, [
 			`**❯ Money:** $${user.money}`,
-			`**❯ Bank Account:** $${user.bank}`
+			`**❯ Bank Account:** $${user.bank}`,
+			`**❯ Net Worth:** $${networth}`
 		])
         
 		message.channel.send(embed);

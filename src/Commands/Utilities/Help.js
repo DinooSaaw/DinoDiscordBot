@@ -29,13 +29,17 @@ module.exports = class extends Command {
 			const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
 
 			if (!cmd) return message.channel.send(`Invalid Command named. \`${command}\``);
-
+			let cooldown = cmd.cooldown
+			if (cmd.cooldown === -1){
+				cooldown = 'None'
+			}
 			embed.setAuthor(`${this.client.utils.capitalise(cmd.name)} Command Help`, this.client.user.displayAvatarURL());
 			embed.setDescription([
 				`**❯ Aliases:** ${cmd.aliases.length ? cmd.aliases.map(alias => `\`${alias}\``).join(' ') : 'No Aliases'}`,
 				`**❯ Description:** ${cmd.description}`,
 				`**❯ Category:** ${cmd.category}`,
-				`**❯ Usage:** ${cmd.usage}`
+				`**❯ Usage:** ${cmd.usage}`,
+				`**❯ Cooldown:** ${cooldown}`
 			]);
 
 			return message.channel.send(embed);

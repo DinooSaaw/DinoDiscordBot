@@ -50,6 +50,7 @@ module.exports = class extends (Event) {
             chalk.bold.white`New Guild Created`
         );
         message.channel.send('New Guild Added To System')
+        return
       }
 
     }
@@ -91,6 +92,7 @@ module.exports = class extends (Event) {
         OldUserDB(message) 
         // console.log(`sus`)
       }
+      // console.log(message)
       function NewUserDB(message){
         const member = message.mentions.members.last() || message.member;
         const User = new DBUser({
@@ -104,7 +106,7 @@ module.exports = class extends (Event) {
           Created: `${moment(member.user.createdTimestamp).format('LT')} ${moment(member.user.createdTimestamp).format('LL')} ${moment(member.user.createdTimestamp).fromNow()}`
         });
         User.save();
-        console.log(chalk.hex("3FA037")(`[DataBase] `) +chalk.bold.white`New User Created`);
+        console.log(chalk.hex("3FA037")(`[DataBase] `) +chalk.bold.white`New User Created: ${message.author.tag}`);
         message.channel.send('New User Added To System')
       }
       function OldUserDB(message){
@@ -129,7 +131,7 @@ module.exports = class extends (Event) {
           ])
           message.channel.send(embed)
           user.bank += 1000
-          user.Tags.push('Lv1')
+          // user.Tags.push('Lv1')
           user.save()
           
         }
@@ -142,7 +144,7 @@ module.exports = class extends (Event) {
           ])
           message.channel.send(embed)
           user.bank += 1000
-          user.Tags.push('Lv2')
+          // user.Tags.push('Lv2')
           user.save()
           
         }
@@ -154,7 +156,7 @@ module.exports = class extends (Event) {
             `**$1000** Has been add to your account`
           ])
           message.channel.send(embed)
-          user.bank += 1000
+          // user.bank += 1000
           user.Tags.push('Lv3')
           user.save()
           
@@ -168,7 +170,7 @@ module.exports = class extends (Event) {
           ])
           message.channel.send(embed)
           user.bank += 1000
-          user.Tags.push('Lv4')
+          // user.Tags.push('Lv4')
           user.save()
           
         }
@@ -177,18 +179,18 @@ module.exports = class extends (Event) {
     if (message.content.match(mentionRegex))
       message.channel.send(
         `My prefix for ${message.guild.name} is \`${guild.prefix}\`.`
-      );
+        );
 
-    const prefix = message.content.match(mentionRegexPrefix)
+        const prefix = message.content.match(mentionRegexPrefix)
       ? message.content.match(mentionRegexPrefix)[0]
       : guild.prefix;
 
     if (!message.content.startsWith(prefix)) return;
-
+    
     const [cmd, ...args] = message.content
-      .slice(prefix.length)
-      .trim()
-      .split(/ +/g);
+    .slice(prefix.length)
+    .trim()
+    .split(/ +/g);
 
     const command =
       this.client.commands.get(cmd.toLowerCase()) ||
@@ -225,11 +227,51 @@ module.exports = class extends (Event) {
         );
       }
 
+      if (command.broken  && message.guild) {
+        let eembed = new MessageEmbed()
+        .setTitle('Out Of Service')
+        .setColor('RED')
+        .setURL('https://discord.com/404')
+        .setImage('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-JC1xP1AQA_M%2FVAQopqcG0PI%2FAAAAAAAAE1Q%2FQwtoBzDmffc%2Fs1600%2F404-error.jpg&f=1&nofb=1')
+        return message.channel.send(eembed);
+      }
+
+      if (command.bugtesting && message.channel.name !== 'bot-testing-grounds' ){
+        let emmbed = new MessageEmbed()
+        .setTitle('This command is a WIP')
+        .setColor('RED')
+        .setDescription("Please Use Command In Guild `Dino's Community` And In The Channel `bot-testing-grounds`")
+        return message.channel.send(emmbed)
+      }
+
+      if (command.cooldown && command.cooldown > 0){
+        console.log(command.name)
+        let cooldownString = command.name
+        let recenlyRan = [] // guild id - user id - command
+        if (recenlyRan.includes(cooldownString)){
+          setTimeout(() => {
+            console.log(`Before`, recenlyRan) 
+
+            recenlyRan = recenlyRan.filter((string) => {
+              string !== cooldownString
+            })
+
+            console.log(`After`, recenlyRan)
+          }, 1000 * command.cooldown);
+          message.channel.delete(1)
+          message.reply(`Calm Down There You Need To Wait`)
+          return
+        } else {
+          recenlyRan.push(cooldownString)
+          return
+        }
+      }
+      
       if (message.guild) {
         const userPermCheck = command.userPerms
           ? this.client.defaultPerms.add(command.userPerms)
           : this.client.defaultPerms;
-        if (userPermCheck) {
+          if (userPermCheck) {
           const missing = message.channel
             .permissionsFor(message.member)
             .missing(userPermCheck);
@@ -237,7 +279,7 @@ module.exports = class extends (Event) {
             return message.channel.send(
               `You are missing ${this.client.utils.formatArray(
                 missing.map(this.client.utils.formatPerms)
-              )} permissions, you need them to use this command!`
+                )} permissions, you need them to use this command!`
             );
           }
         }

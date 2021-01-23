@@ -19,7 +19,8 @@ module.exports = class extends Command {
 			description: '',
 			category: 'Economy',
 			usage: '',
-			guildOnly: true
+            guildOnly: true,
+            broken: true
 		});
 	}
 

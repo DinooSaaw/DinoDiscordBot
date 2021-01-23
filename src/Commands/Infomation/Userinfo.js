@@ -36,6 +36,7 @@ module.exports = class extends Command {
 		const member = message.mentions.members.last() || message.guild.members.cache.get(target) || message.member;
 		let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
 		if (!user) return
+		let networth = user.money + user.bank
 		const roles = member.roles.cache
 			.sort((a, b) => b.position - a.position)
 			.map(role => role.toString())
@@ -67,6 +68,7 @@ module.exports = class extends Command {
 				`**❯ Levels:** ${user.level} Level ${user.xp} Exp`,
 				`**❯ Bank Account:** $${user.bank}`,
 				`**❯ Money:** $${user.money}`,
+				`**❯ Net Worth:** $${networth}`,
 			]);
 		return message.channel.send(embed);
 	}

@@ -8,10 +8,13 @@ module.exports = class extends Event {
 
 	async run(member) {
 		console.log(member)
-        const welcome = member.guild.channels.cache.find(ch => ch.name === 'general' || ch.name === 'welcome' || ch.name == 'log');
+        const welcome = member.guild.channels.cache.find(ch => ch.name === 'general' || ch.name === 'welcome' || ch.name == 'main-chat');
 		const log = member.guild.channels.cache.find(ch => ch.name == 'log' || ch.name == 'logs');
-		
-        welcome.send(`Welcome to the server ${member}`);
+		if (!welcome){
+			return
+		} else {
+			welcome.send(`Welcome to the server ${member}`);
+		}
 		console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.magenta(`[${member.guild.name}] `) + chalk.white(`User "${member.user.username}" has joined`));
 		
 		let guild = await DBGuild.findOne({ GuildId: member.Guild.id, GuildName: member.Guild.name });
