@@ -176,6 +176,7 @@ module.exports = class extends (Event) {
         }
       }
     }
+
     if (message.content.match(mentionRegex))
       message.channel.send(
         `My prefix for ${message.guild.name} is \`${guild.prefix}\`.`
@@ -240,7 +241,7 @@ module.exports = class extends (Event) {
         let emmbed = new MessageEmbed()
         .setTitle('This command is a WIP')
         .setColor('RED')
-        .setDescription("Please Use Command In Guild `Dino's Community` And In The Channel `bot-testing-grounds`")
+        .setDescription("Please Use Command In Guild `Dino's Community` And In The Channel <#803633180157673505>")
         return message.channel.send(emmbed)
       }
 

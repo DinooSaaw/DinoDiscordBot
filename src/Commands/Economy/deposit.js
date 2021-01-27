@@ -17,7 +17,7 @@ module.exports = class extends Command {
 
 	async run(message) {
 		let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
-        if (!user) return
+        if (!user) return message.channel.send(`**${message.author.username}** isnt in the system`)
         const args = message.content.trim().split(/ +/g);
         const Money = args[1]
         if (!Money) return

@@ -15,13 +15,13 @@ module.exports = class extends Command {
 	}
 
 	async run(message) {
-		let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
-        if (!user) return
-        if (user.money <= 0) return
         const member = message.mentions.members.last() || message.member;
-        if (!member) return
+		let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
         let user1 = await DBUser.findOne({ id: member.id, Username: member.user.username });
-        if (!user1) return
+        if (user.money <= 0) return
+        if (!member) return
+        if (!user) return message.channel.send(`**${message.author.username}** isnt in the system`)
+        if (!user1) return message.channel.send(`**${member.user.username}** isnt in the system`)
         const args = message.content.trim().split(/ +/g);
 		const MOENY = args[2]
         if (isNaN(MOENY)) return
@@ -31,6 +31,8 @@ module.exports = class extends Command {
         if (message.author.username == member.user.username) return
         let UserMone = Number(MOENY)
         let UserMon = Math.round(UserMone)
+        let networth = user1.money + user1.bank
+        if (networth >= 1500000) return message.reply(`Your Have Hit The Max Net Worth`)
         Pay(UserMone)
         
         

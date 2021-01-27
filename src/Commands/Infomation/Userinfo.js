@@ -65,6 +65,7 @@ module.exports = class extends Command {
 				`\u200b`
 			])
 			.addField('Info', [
+				`**❯ Kills:** ${user.kill}`,
 				`**❯ Levels:** ${user.level} Level ${user.xp} Exp`,
 				`**❯ Bank Account:** $${user.bank}`,
 				`**❯ Money:** $${user.money}`,

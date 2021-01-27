@@ -18,15 +18,16 @@ module.exports = class extends Command {
 	// eslint-disable-next-line no-unused-vars
 	async run(message) {
         let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
-		if (!user) return
+		if (!user) return message.channel.send(`**${message.author.username}** isnt in the system`)
 		if (user.money <= 0) return message.reply(`No Poor People Allowed Here`)
         let networth = user.money + user.bank
         if (networth >= 1500000) return message.reply(`Your Have Hit The Max Net Worth`)
-        
         let number = Math.floor(Math.random() * (100 - 1) + 1)
         let hint = Math.floor(Math.random() * (100 - 1) + 1)
-        let money = Number(Math.floor(Math.random() * (300 - 1) + 1))
-        console.log(number)
+        let Money = Number(Math.floor(Math.random() * (300 - 1) + 1))
+        let money = Money * user.multiplier
+    
+        // console.log(number)
         let embedA = new MessageEmbed()
         .setTitle(`${message.author.username}'s High-Low Game`)
         .setDescription(`A number secret between 1-100 has been chosen.\n Your hint is **${hint}**. \n Respond with "*high*", "*low*", or "*jackpot*".`)

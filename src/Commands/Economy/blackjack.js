@@ -12,26 +12,30 @@ module.exports = class extends (
       category: "Economy",
       usage: "",
       guildOnly: true,
-      bugtesting: true,
+      // bugtesting: true,
     });
   }
-  
+
   async run(message) {
-    let InGame = false
+    let InGame = false;
     let user = await DBUser.findOne({
       id: message.author.id,
       Username: message.author.username,
     });
-    if (!user) return;
+    if (!user)
+      return message.channel.send(
+        `**${message.author.username}** isnt in the system`
+      );
     if (user.money <= 0) return message.reply(`No Poor People Allowed Here`);
-    let networth = user.money + user.bank
-    if (networth >= 1500000) return message.reply(`Your Have Hit The Max Net Worth`)
+    let networth = user.money + user.bank;
+    if (networth >= 1500000)
+      return message.reply(`Your Have Hit The Max Net Worth`);
     const args = message.content.trim().split(/ +/g);
-    const bet = Number(args[1]);
-    if (!bet) return message.reply(`Please Give A Bet`)
-    if (isNaN(bet)) return message.reply(`Please Give A Bet`)
-    if (bet <= 0) return message.reply(`Please Give A Bet`)
-
+    const Bet = Number(args[1]);
+    if (!Bet) return message.reply(`Please Give A Bet`);
+    if (isNaN(Bet)) return message.reply(`Please Give A Bet`);
+    if (Bet <= 0) return message.reply(`Please Give A Bet`);
+    let bet = Bet * user.multiplier;
     // Deck
 
     const deck = [
@@ -107,7 +111,7 @@ module.exports = class extends (
     };
     Start();
     function Start() {
-      InGame = true
+      InGame = true;
       let liveDeck = [...deck];
       let playersHand = liveDeck.splice(createRandomNumber(liveDeck.length), 1);
       let dealersHand = liveDeck.splice(createRandomNumber(liveDeck.length), 1);
@@ -123,7 +127,7 @@ module.exports = class extends (
         .setFooter(`Use 'hit' or 'stand'`)
         .addField("Cards", [
           `Player Cards: ${getScore(playersHand)}`,
-          `Dealer's Cards: ${getScore(dealersHand)}`
+          `Dealer's Cards: ${getScore(dealersHand)}`,
         ]);
       message.channel.send(startembed);
       const game = new MessageCollector(
@@ -132,12 +136,21 @@ module.exports = class extends (
         { time: 20000 }
       );
       game.on("collect", (message) => {
-        if (message.content == "hit" || message.content == "!hit" || message.content == "HIT" || message.content == "!HIT") {
+        if (
+          message.content == "hit" ||
+          message.content == "!hit" ||
+          message.content == "HIT" ||
+          message.content == "!HIT"
+        ) {
           hit(playersHand, dealersHand);
         }
-        if (message.content == "stand" || message.content == "!stand" || message.content == "STAND" || message.content == "!STAND") {
+        if (
+          message.content == "stand" ||
+          message.content == "!stand" ||
+          message.content == "STAND" ||
+          message.content == "!STAND"
+        ) {
           stand(playersHand, dealersHand);
-          
         } else {
           game.stop();
         }
@@ -145,7 +158,7 @@ module.exports = class extends (
 
       function hit(PlayerHand, DelerHand) {
         let drawCard = liveDeck.splice(createRandomNumber(liveDeck.length), 1);
-        
+
         playersHand.push(drawCard[0]);
         drawCard.pop();
         // console.log(getScore(PlayerHand));
@@ -156,21 +169,32 @@ module.exports = class extends (
           .setFooter(`Use 'HIT' or 'stand'`)
           .addField("Cards", [
             `Player's Cards: ${getScore(PlayerHand)}`,
-            `Dealer's Cards: ${getScore(DelerHand)}`
+            `Dealer's Cards: ${getScore(DelerHand)}`,
           ]);
-          if (getScore(PlayerHand) >= 21) return 
-          // console.log(`bugtesting`)
-          message.channel.send(emmbed);
+        if (getScore(PlayerHand) >= 21) return;
+        // console.log(`bugtesting`)
+        message.channel.send(emmbed);
         const game = new MessageCollector(
           message.channel,
           (m) => m.author.id === message.author.id,
           { time: 20000 }
         );
         game.on("collect", (message) => {
-          if (message.content == "hit" || message.content == "!hit" || message.content == "HIT" || message.content == "!HIT") {
+          if (
+            message.content == "hit" ||
+            message.content == "!hit" ||
+            message.content == "HIT" ||
+            message.content == "!HIT"
+          ) {
             hit(playersHand, dealersHand);
           }
-          if (message.content == "stand" || message.content == "!stand" || message.content == "STAND" || message.content == "!STAND") {
+          if (
+            message.content == "stand" ||
+            message.content == "!stand" ||
+            message.content == "STAND" ||
+            message.content == "!STAND" ||
+            message.content == "!Stand"
+          ) {
             stand(playersHand, dealersHand);
           } else {
             game.stop();
@@ -181,7 +205,7 @@ module.exports = class extends (
 
     function stand(PlayerHand, DelearHand) {
       // console.log(`1  aADVLKJHGFD`)
-      if (InGame === false) return
+      if (InGame === false) return;
       let liveDeck = [...deck];
       let drawCard = liveDeck.splice(createRandomNumber(liveDeck.length), 1);
       DelearHand.push(drawCard[0]);
@@ -194,7 +218,7 @@ module.exports = class extends (
         .setFooter(`Use 'hit' or 'stand'`)
         .addField("Cards", [
           `Player's Cards: ${getScore(PlayerHand)}`,
-          `Dealer's Cards: ${getScore(DelearHand)}`
+          `Dealer's Cards: ${getScore(DelearHand)}`,
         ])
         .setFooter(`You Have Stand`);
       message.channel.send(standembed);
@@ -204,48 +228,34 @@ module.exports = class extends (
     function check(ph, dh) {
       if (getScore(ph) >= 22) {
         Lose(ph, dh);
-        return
       }
       if (getScore(dh) >= 22) {
         Win(ph, dh);
-        return
       }
       if (getScore(ph) >= 21) {
         Win(ph, dh);
-        return
-      }
-      else {
+      } else {
       }
     }
 
     function Standcheck(ph, dh) {
-      if (getScore(ph) >= 22) {
-        Lose(ph, dh);
-        return
-      }
       if (getScore(dh) >= 22) {
         Win(ph, dh);
-        return
-      }
-      if (getScore(ph) == 21) {
-        Win(ph, dh);
-        return
+        return;
       }
       if (getScore(ph) <= getScore(dh)) {
         Lose(ph, dh);
-        return
-      } 
-      if (getScore(ph) > getScore(dh)) {
-          Win(ph, dh)
+        return;
       }
-      else {
-        // console.log(chalk.green(`Check Pass! 2`));
-        check(ph, dh)
+      if (getScore(ph) > getScore(dh)) {
+        Win(ph, dh);
+      } else {
+        check(ph, dh);
       }
     }
 
     function Delearcheck(ph, dh) {
-      if (getScore(dh) <= 17) {
+      if (getScore(dh) <= 16) {
         let liveDeck = [...deck];
         let drawCard = liveDeck.splice(createRandomNumber(liveDeck.length), 1);
         dh.push(drawCard[0]);
@@ -253,7 +263,7 @@ module.exports = class extends (
         check(ph, dh);
         // console.log(`DH ${getScore(dh)}!-`);
         if (getScore(dh) <= 17) {
-          Delearcheck(ph, dh)
+          Delearcheck(ph, dh);
         }
         return dh;
       } else {
@@ -261,37 +271,44 @@ module.exports = class extends (
       }
     }
 
-    function Win(ph, dh){
+    function Win(ph, dh) {
       let winembed = new MessageEmbed()
-      .setTitle(`${message.author.username}'s Blackjack Game`)
-      .setColor(`GREEN`)
-      .addField('Cards', [
-        `Player's Card: ${getScore(ph)}`,
-        `Dealer's Card: ${getScore(dh)}`
-      ])
-      .addField(`Transaction`, [
-        `$${bet} has been add to your account`
-      ])
+        .setTitle(`${message.author.username}'s Blackjack Game`)
+        .setColor(`GREEN`)
+        .addField("Cards", [
+          `Player's Card: ${getScore(ph)}`,
+          `Dealer's Card: ${getScore(dh)}`
+        ])
+        .addField(`Transaction`, [`$${bet} has been add to your account`])
       message.channel.send(winembed)
       user.money += bet
       user.save()
-      console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
+      console.log(
+        chalk.hex("70bb65")("[Transaction] ") +
+          chalk.magenta(`[${message.author.username}] `) +
+          chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
+      );
+      return;
     }
-    function Lose(ph, dh){
+    
+    function Lose(ph, dh) {
       let loseembed = new MessageEmbed()
-      .setTitle(`${message.author.username}'s Blackjack Game`)
-      .setColor(`RED`)
-      .addField('Cards', [
-        `Player's Card: ${getScore(ph)}`,
-        `Dealer's Card: ${getScore(dh)}`
-      ])
-      .addField(`Transaction`, [
-        `$${bet} wasn't added to your account`
-      ])
-      message.channel.send(loseembed)
-      user.money -= bet
-      user.save()
-      console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
+        .setTitle(`${message.author.username}'s Blackjack Game`)
+        .setColor(`RED`)
+        .addField("Cards", [
+          `Player's Card: ${getScore(ph)}`,
+          `Dealer's Card: ${getScore(dh)}`,
+        ])
+        .addField(`Transaction`, [`$${bet} wasn't added to your account`]);
+      message.channel.send(loseembed);
+      user.money -= bet;
+      user.save();
+      console.log(
+        chalk.hex("70bb65")("[Transaction] ") +
+          chalk.magenta(`[${message.author.username}] `) +
+          chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
+      );
+      return;
     }
   }
 };
