@@ -16,15 +16,13 @@ module.exports = class extends Event {
 			welcome.send(`Welcome to the server ${member}`);
 		}
 		console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.magenta(`[${member.guild.name}] `) + chalk.white(`User "${member.user.username}" has joined`));
-		
-		let guild = await DBGuild.findOne({ GuildId: member.Guild.id, GuildName: member.Guild.name });
+		// console.log(`${member} ${member.Guild.name}`)
+		let guild = await DBGuild.findOne({ GuildId: member.guild.id, GuildName: member.guild.name });
 		if (!guild) {
 
 		} else {
-			guild =  DBGuild({
-				MemberCount: member.guild.memberCount,
-			  });
-			  guild.save();
+			guild.MemberCount == member.guild.memberCount
+			guild.save();
 		}
         const embed = new MessageEmbed()
 			.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))

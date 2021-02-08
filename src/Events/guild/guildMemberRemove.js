@@ -2,6 +2,7 @@ const Event = require('../../Structures/Event');
 const chalk = require('chalk');
 const { MessageEmbed } = require('discord.js');
 const moment = require('moment');
+const DBGuild = require('../../Mongoose/Schema/Guild')
 
 module.exports = class extends Event {
 
@@ -12,6 +13,13 @@ module.exports = class extends Event {
 			return
 		} else {
 			welcome.send(`${member} Has left the the server `);
+		}
+		let guild = await DBGuild.findOne({ GuildId: member.guild.id, GuildName: member.guild.name });
+		if (!guild) {
+
+		} else {
+			guild.MemberCount == member.guild.memberCount
+			guild.save();
 		}
 		
         console.log(chalk.blueBright(`[GUILD] `) + chalk.bold.green(`[${member.guild.name}] `) + chalk.white(`User "${member.user.username}" has left`));
