@@ -24,7 +24,7 @@ module.exports = class extends Command {
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 			.addField('Commands', [
 				`**❯ $500,000:** Custom Commands (Id:1)`,
-				`**❯ $250,000:** Access **a** Commands (Id:2)`
+				`**❯ $250,000:** Access **one** Commands (Id:2)`
 			])
 			.addField('Code', [
 				`**❯ $100,000:** Custom Coding Lesson (Id:3)`,
@@ -55,6 +55,21 @@ module.exports = class extends Command {
 						message.reply("You Want To Buy (ID2)!");
 						ID2()
 					} else if (message.content == "!buy 3") {
+						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
+						if (user.money < 100000) return message.reply(`You dont have enough money`)
+						message.reply("You Want To Buy (ID3)!");
+						ID3() 
+					} else if (message.content == "!buy 4") {
+						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
+						if (user.money < 100000) return message.reply(`You dont have enough money`)
+						message.reply("You Want To Buy (ID3)!");
+						ID3()
+					} else if (message.content == "!buy 5") {
+						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
+						if (user.money < 100000) return message.reply(`You dont have enough money`)
+						message.reply("You Want To Buy (ID3)!");
+						ID3()
+					} else if (message.content == "!buy 6") {
 						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
 						if (user.money < 100000) return message.reply(`You dont have enough money`)
 						message.reply("You Want To Buy (ID3)!");
