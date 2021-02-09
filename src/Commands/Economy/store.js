@@ -29,6 +29,11 @@ module.exports = class extends Command {
 			.addField('Code', [
 				`**❯ $100,000:** Custom Coding Lesson (Id:3)`,
 			])
+			.addField('Battle Set', [
+				`**❯ $50,000:** ~~Diamond Set~~ (Id:4)`,
+				`**❯ $90,000:** ~~Gun Set~~ (Id:5)`,
+				`**❯ $500,000:** ~~Anime Set~~ (Id:6)`,
+			])
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 			.setTimestamp();
 			message.channel.send(embed)

@@ -57,6 +57,9 @@ module.exports = class extends Command {
                 `**❯ Kills:** ${user.kill}`,
                 `**❯ Multiplier:** ${user.multiplier}`
              ])
+             Embed.addField("What's New?", [
+                 `Your **multiplier** has upgraded but what does that mean. \n It means you now earn ${user.multiplier} times money`
+             ])
              message.channel.send(Embed)
         }
         

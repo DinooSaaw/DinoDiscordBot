@@ -9,8 +9,8 @@ module.exports = class extends Command {
 			category: 'Fun',
 			usage: '<User>',
 			guildOnly: true,
-            args: true,
-            bugtesting: true,
+            args: true
+            //bugtesting: true,
             // broken: true
 		});
 	}
