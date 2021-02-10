@@ -26,7 +26,16 @@ module.exports = class extends Command {
         if (message.author.id === member.user.id) return message.channel.send("You can't battle your self")
         message.channel.send(`${member.user.tag} Has 10 sec to agree \n Use **agree**`)
         let Deathz = []
-        let Attack = []       
+        let Attack = []      
+        let intro = [
+            `It's time to d-d-d-d-d-d-d-duel`,
+            `Round One Fight!`,
+            `Round Two Fight!`,
+            `Round Three Fight!`,
+            `Round Six-Nine (Hey! Nice) Fight!`,
+            `Let It Rip!`,
+            `I WANT A FAIR MATCH. My your odds be in your favor`
+        ] 
         Start()
 
         function Start() {
@@ -49,6 +58,25 @@ module.exports = class extends Command {
                                 `Kill`,
                                 `Death`
                                 // `Kill`
+                            ]
+                        }
+                    }
+                    if(user.Inventory.includes("Diamond_Sword")){
+                        Deathz = [
+                            `After a thrust to the eyes. A victor was decided`,
+                            `After a Seppuku. A victor was decided`,
+                            `After a "Sword Goes StAb sTaB". A victor was decided`,
+                            `After a fatal strike to the gut. A victor was decided`,
+                            `After a overhead cut brought down firmly on the skull. A victor was decided`, 
+                            `After a swift **"I like your cut g"**. A victor has been decided`
+                        ]
+                        if (user1.Inventory.includes("Wooden_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Kill`,
+                                `Death`
+                                `Kill`
                             ]
                         }
                     }
@@ -84,7 +112,7 @@ module.exports = class extends Command {
         function Death(){
             let muder = Deathz[Math.floor(Math.random() * Deathz.length)]
             let embed = new MessageEmbed()
-            .setTitle(`Its time to d-d-d-d-d-d duel!`)
+            .setTitle(intro[Math.floor(Math.random() * intro.length)])
             .setColor("RANDOM")
             .setDescription(`In a long winded battle to the death \n *${muder}* \n **${user1.Username}** Has Killed **${user.Username}**`)
             message.channel.send(embed)   
