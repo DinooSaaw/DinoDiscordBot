@@ -31,17 +31,26 @@ module.exports = class extends Command {
 				`**❯ $100,000:** Custom Coding Lesson (Id:3)`,
 			])
 			.addField('Battle Set', [
-				`**❯ $50,000:** ~~Diamond Set~~ (Id:4)`,
+				`**❯ $50,000:** Diamond Set (Id:4)`,
 				`**❯ $90,000:** ~~Gun Set~~ (Id:5)`,
 				`**❯ $500,000:** ~~Anime Set~~ (Id:6)`,
 			])
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 			.setTimestamp();
+
 			message.channel.send(embed)
+		
+		const Info = new MessageEmbed()
+			.setColor('RANDOM')
+			.setAuthor(`${message.guild.name} Store`, message.guild.iconURL({ dynamic: true }))
+			.setThumbnail(this.client.user.displayAvatarURL())
+			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
+		
 			Buy()
 
 			function Buy(){
 				message.channel.send(`**Please Buy With !buy <id>**`)
+				message.channel.send(`**You can check more with !info <id>**`)
 				const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
 				// console.log(collector)
 				collector.on('collect', message => {
@@ -61,20 +70,20 @@ module.exports = class extends Command {
 						message.reply("You Want To Buy (ID3)!");
 						ID3() 
 					} else if (message.content == "!buy 4") {
-						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
-						if (user.money < 100000) return message.reply(`You dont have enough money`)
-						message.reply("You Want To Buy (ID3)!");
-						ID3()
+						if (user.Tags.includes('Store:Id4')) return message.reply(`You can only have one **ID4**`)
+						if (user.money < 50000) return message.reply(`You dont have enough money`)
+						message.reply("You Want To Buy (ID4)!");
+						ID4()
 					} else if (message.content == "!buy 5") {
-						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
-						if (user.money < 100000) return message.reply(`You dont have enough money`)
-						message.reply("You Want To Buy (ID3)!");
-						ID3()
+						if (user.Tags.includes('Store:Id5')) return message.reply(`You can only have one **ID5**`)
+						if (user.money < 90000) return message.reply(`You dont have enough money`)
+						message.reply("You Want To Buy (ID5)!");
+						ID5()
 					} else if (message.content == "!buy 6") {
-						if (user.Tags.includes('Store:Id3')) return message.reply(`You can only have one **ID3**`)
+						if (user.Tags.includes('Store:Id6')) return message.reply(`You can only have one **ID6**`)
 						if (user.money < 100000) return message.reply(`You dont have enough money`)
-						message.reply("You Want To Buy (ID3)!");
-						ID3()
+						message.reply("You Want To Buy (ID6)!");
+						ID6()
 					}
 			})
 		}
@@ -122,6 +131,82 @@ module.exports = class extends Command {
 						message.channel.send(`${message.author.username} bought ID3`)
 					} else return	
 				})
+			}
+
+			function ID4(){
+				message.channel.send("Are You Sure /n `Yes` or `No`")
+				const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+				// console.log(collector)
+				collector.on('collect', message => {
+					if (message.content == "Yes") {
+						console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
+						user.money -=  50000
+						user.Tags.push('Store:Id4')
+						if (user.Tags.includes('Iron_Sword')) {
+							user.Inventory.pull('Iron_Sword')
+						}
+						user.Inventory.push('Diamond_Sword')
+						user.save()
+						message.channel.bulkDelete(7)
+						message.channel.send(`${message.author.username} bought ID4`)
+					} else return	
+				})
+			}
+
+			function InfoID1 () {
+				Info.addField('Custom Command', [
+					`**❯ Cost:** $500,000`,
+					`**❯ ID:** 1`,
+					`**❯ Name:** Custom Command`
+				])
+				message.channel.send(Info)
+			}
+			
+			function InfoID2 () {
+				Info.addField('Custom Command', [
+					`**❯ Cost:** $500,000`,
+					`**❯ ID:** 1`,
+					`**❯ Name:** Custom Command`
+				])
+				message.channel.send(Info)
+			}
+
+			function InfoID3 () {
+				Info.addField('Custom Coding Lesson', [
+					`**❯ Cost:** $100,000`,
+					`**❯ ID:** 3`,
+					`**❯ Name:** Custom Coding Lesson`
+				])
+				message.channel.send(Info)
+			}
+			function InfoID4 () {
+				Info.addField('Diamond Set', [
+					`**❯ Cost:** $50,000`,
+					`**❯ ID:** 4`,
+					`**❯ Name:** Diamond Set`
+				])
+				Info.addField('Unlocks', [
+					`**❯ Sword:** *Diamond Sword*`,
+					`**❯ Shield:** *Null*`,
+
+				])
+				message.channel.send(Info)
+			}
+			function InfoID5 () {
+				Info.addField('Custom Command', [
+					`**❯ Cost:** $500,000`,
+					`**❯ ID:** 1`,
+					`**❯ Name:** Custom Command`
+				])
+				message.channel.send(Info)
+			}
+			function InfoID6 () {
+				Info.addField('Custom Command', [
+					`**❯ Cost:** $500,000`,
+					`**❯ ID:** 1`,
+					`**❯ Name:** Custom Command`
+				])
+				message.channel.send(Info)
 			}
 		}
 }
