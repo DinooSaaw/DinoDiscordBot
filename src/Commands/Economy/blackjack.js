@@ -13,6 +13,7 @@ module.exports = class extends (
       usage: "",
       guildOnly: true,
       // bugtesting: true,
+      broken: true
     });
   }
 
@@ -109,7 +110,9 @@ module.exports = class extends (
       }
       return score;
     };
+
     Start();
+    
     function Start() {
       InGame = true;
       let liveDeck = [...deck];
@@ -227,10 +230,10 @@ module.exports = class extends (
 
     function check(ph, dh) {
       if (getScore(ph) >= 22) {
-        Lose(ph, dh);
+        BustLose(ph, dh);
       }
       if (getScore(dh) >= 22) {
-        Win(ph, dh);
+        BustWin(ph, dh);
       }
       if (getScore(ph) >= 21) {
         Win(ph, dh);
@@ -240,7 +243,7 @@ module.exports = class extends (
 
     function Standcheck(ph, dh) {
       if (getScore(dh) >= 22) {
-        Win(ph, dh);
+        BustWin(ph, dh);
         return;
       }
       if (getScore(ph) <= getScore(dh)) {
@@ -270,6 +273,12 @@ module.exports = class extends (
         // console.log(`DH! ${getScore(dh)}`);
       }
     }
+    
+    function UserSave(ph, dh) {
+      user.save()
+      console.log(`Player Hand:${ph}`)
+      console.log(`Dealer Hand:${dh}`)
+    }
 
     function Win(ph, dh) {
       let winembed = new MessageEmbed()
@@ -282,13 +291,31 @@ module.exports = class extends (
         .addField(`Transaction`, [`$${bet} has been add to your account`])
       message.channel.send(winembed)
       user.money += bet
-      user.save()
+      UserSave(ph ,dh)
       console.log(
         chalk.hex("70bb65")("[Transaction] ") +
           chalk.magenta(`[${message.author.username}] `) +
           chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
       );
-      return;
+    }
+    
+    function BustWin(ph, dh) {
+      let winembed = new MessageEmbed()
+        .setTitle(`${message.author.username}'s Blackjack Game`)
+        .setColor(`GREEN`)
+        .addField("Cards", [
+          `Player's Card: ${getScore(ph)}`,
+          `Dealer's Card: NaN`
+        ])
+        .addField(`Transaction`, [`$${bet} has been add to your account`])
+      message.channel.send(winembed)
+      user.money += bet
+      console.log(
+        chalk.hex("70bb65")("[Transaction] ") +
+          chalk.magenta(`[${message.author.username}] `) +
+          chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
+      )
+      UserSave(ph, dh)
     }
     
     function Lose(ph, dh) {
@@ -302,13 +329,34 @@ module.exports = class extends (
         .addField(`Transaction`, [`$${bet} wasn't added to your account`]);
       message.channel.send(loseembed);
       user.money -= bet;
-      user.save();
       console.log(
         chalk.hex("70bb65")("[Transaction] ") +
           chalk.magenta(`[${message.author.username}] `) +
           chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
-      );
-      return;
+      )
+      UserSave(ph, dh)
     }
+
+
+    function BustLose(ph, dh) {
+      let loseembed = new MessageEmbed()
+        .setTitle(`${message.author.username}'s Blackjack Game`)
+        .setColor(`RED`)
+        .addField("Cards", [
+          `Player's Card: NaN`,
+          `Dealer's Card: ${getScore(dh)}`,
+        ])
+        .addField(`Transaction`, [`$${bet} wasn't added to your account`]);
+      message.channel.send(loseembed);
+      user.money -= bet;
+  
+      console.log(
+        chalk.hex("70bb65")("[Transaction] ") +
+          chalk.magenta(`[${message.author.username}] `) +
+          chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`)
+      )
+      UserSave(ph, dh)
+    }
+
   }
 };

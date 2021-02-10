@@ -1,6 +1,7 @@
 const { MessageEmbed, MessageCollector } = require('discord.js');
 const Command = require('../../Structures/Command');
 const DBUser = require("../../Mongoose/Schema/user");
+const DBStore = require("../../Mongoose/Schema/Store");
 const chalk = require('chalk')
 module.exports = class extends Command {
 
