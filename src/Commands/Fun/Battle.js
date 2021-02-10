@@ -60,6 +60,15 @@ module.exports = class extends Command {
                                 // `Kill`
                             ]
                         }
+                        if (user1.Inventory.includes("Riot_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`
+                                // `Kill`
+                            ]
+                        }
                     }
                     if(user.Inventory.includes("Diamond_Sword")){
                         Deathz = [
@@ -79,6 +88,47 @@ module.exports = class extends Command {
                                 `Kill`
                             ]
                         }
+                        if (user1.Inventory.includes("Riot_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`
+                                `Kill`
+                                `Kill`
+                            ]
+                        }
+                    }
+                    if(user.Inventory.includes("Glock-19")){
+                        Deathz = [
+                            `After a Shot to the head a body drops to the floor. A victor was decided`,
+                            `After a 36 gun shots. A victor was decided`,
+                            `After a pistol wip. A victor was decided`,
+                            `After a fatal gun shot to the gut. A victor was decided`,
+                            `After a some pee. A victor was decided`, 
+                            `After a loud gun shot and a **"I like your cut g"**. A victor has been decided`
+                        ]
+                        if (user1.Inventory.includes("Wooden_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Kill`,
+                                `Death`
+                                `Kill`
+                            ]
+                        }
+                        if (user1.Inventory.includes("Riot_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`
+                                `Kill`
+                                `Kill`
+                            ]
+                        }
                     }
                     let option = Attack[Math.floor(Math.random() * Attack.length)]
                     if (option === "Kill"){
@@ -92,7 +142,7 @@ module.exports = class extends Command {
                 } else {
                     message.channel.bulkDelete(3)
                     collector.stop()
-                    message.channel.send(`Battle Was **Denied**`)
+                    message.channel.send(`Battle Was **Canceled**`)
                 }	
             })      
         }
