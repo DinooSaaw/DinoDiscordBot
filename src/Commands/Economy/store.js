@@ -1,7 +1,6 @@
 const { MessageEmbed, MessageCollector } = require('discord.js');
 const Command = require('../../Structures/Command');
 const DBUser = require("../../Mongoose/Schema/user");
-const DBStore = require("../../Mongoose/Schema/Store");
 const chalk = require('chalk')
 module.exports = class extends Command {
 
@@ -193,7 +192,7 @@ module.exports = class extends Command {
 				})
 		}
 			function InfoID1 () {
-				Info.addField('Custom Command', [
+				Info.addField('Info', [
 					`**❯ Cost:** $500,000`,
 					`**❯ ID:** 1`,
 					`**❯ Name:** Custom Command`
@@ -203,17 +202,17 @@ module.exports = class extends Command {
 				message.channel.send(Info)
 		}	
 			function InfoID2 () {
-				Info.addField('Custom Command', [
-					`**❯ Cost:** $500,000`,
-					`**❯ ID:** 1`,
-					`**❯ Name:** Custom Command`
+				Info.addField('Info', [
+					`**❯ Cost:** $50,000`,
+					`**❯ ID:** 2`,
+					`**❯ Name:** Access **one** Commands`
 				])
 
 				message.channel.bulkDelete(7)
 				message.channel.send(Info)
 		}
 			function InfoID3 () {
-				Info.addField('Custom Coding Lesson', [
+				Info.addField('Info', [
 					`**❯ Cost:** $100,000`,
 					`**❯ ID:** 3`,
 					`**❯ Name:** Custom Coding Lesson`
@@ -224,7 +223,7 @@ module.exports = class extends Command {
 				message.channel.send(Info)
 		}
 			function InfoID4 () {
-				Info.addField('Diamond Set', [
+				Info.addField('Info', [
 					`**❯ Cost:** $50,000`,
 					`**❯ ID:** 4`,
 					`**❯ Name:** Diamond Set`
@@ -239,7 +238,7 @@ module.exports = class extends Command {
 				message.channel.send(Info)
 		}
 			function InfoID5 () {
-				Info.addField('Riot Set', [
+				Info.addField('Info', [
 					`**❯ Cost:** $90,000`,
 					`**❯ ID:** 5`,
 					`**❯ Name:** Riot Set`
@@ -250,11 +249,12 @@ module.exports = class extends Command {
 					`**❯ Sword:** *Glock-19*`,
 					`**❯ Shield:** *Riot_Shield*`,
 				])
-				message.channel.bulkDelete(7)
-				// message.channel.send(Info)
+				// message.channel.bulkDelete(7)
+				message.channel.send(Info)
+				console.log(`true`)
 		}
 			function InfoID6 () {
-				Info.addField('Custom Command', [
+				Info.addField('Info', [
 					`**❯ Cost:** $500,000`,
 					`**❯ ID:** 1`,
 					`**❯ Name:** Custom Command`
