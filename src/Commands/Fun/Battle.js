@@ -27,6 +27,13 @@ module.exports = class extends Command {
         message.channel.send(`${member.user.tag} Has 10 sec to agree \n Use **agree**`)
         let Deathz = []
         let Attack = []      
+        let short = [
+            `In a long winded battle to the death`,
+            `POG fight`,
+            `Hey everyone, watch someone get fucking killed`,
+            `**FAKQ FAKQ FAKQ**`
+
+        ]      
         let intro = [
             `It's time to d-d-d-d-d-d-d-duel`,
             `Round One Fight!`,
@@ -69,6 +76,19 @@ module.exports = class extends Command {
                                 // `Kill`
                             ]
                         }
+                        if (user1.Inventory.includes("Anime_Body_Pillow")){
+                            Attack = [
+                                // `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`
+                                // `Kill`
+                            ]
+                        }
                     }
                     if(user.Inventory.includes("Diamond_Sword")){
                         Deathz = [
@@ -97,6 +117,16 @@ module.exports = class extends Command {
                                 `Death`
                                 `Kill`
                                 `Kill`
+                            ]
+                        }
+                        if (user1.Inventory.includes("Anime_Body_Pillow")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`
+                                `Death`
+                                `Death`
+                                // `Kill`
                             ]
                         }
                     }
@@ -129,6 +159,60 @@ module.exports = class extends Command {
                                 `Kill`
                             ]
                         }
+                        if (user1.Inventory.includes("Anime_Body_Pillow")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Kill`,
+                                `Death`,
+                                `Death`
+                                // `Kill`
+                            ]
+                        }
+                    }
+                    if(user.Inventory.includes("Bakuzan")){
+                        Deathz = [
+                            `1After a Quote "A lesson without pain is meaningless. For you cannot gain something without sacrificing something else in return. But once you have recovered it and made it your own... You will gain an irreplaceable Fullmetal heart." A victor was decided`,
+                            `2After a Quote "Fear is not evil. It tells you what weakness is. And once you know your weakness, you can become stronger as well as kinder." A victor was decided`,
+                            `3After a Quote "The country? The skies? You can have them. I’m busy just protecting what’s right in front of me. I don’t know what’ll happen to me in the future, but if something has fallen at my feet, then the least I can do is pick it up." A victor was decided`,
+                            `4After a Quote "When do you think people die? When they are shot through the heart by the bullet of a pistol? No. When they are ravaged by an incurable disease? No. When they drink a soup made from a poisonous mushroom!? No! It’s when they are forgotten." A victor was decided`,
+                            `5After a Quote "The world is cruel, but also very beautiful." A victor was decided`,
+                            `6After a Quote "Fear is freedom! Subjugation is liberation! Contradiction is truth! Those are the facts of this world! And you will all surrender to them, you pigs in human clothing!" A victor was decided`,
+                            `7After a Quote "I am the hope of the universe. I am the answer to all living things that cry out for peace. I am protector of the innocent. I am the light in the darkness. I am truth. Ally to good! Nightmare to you!" A victor was decided`,
+                            `8After a Quote "You can't judge how beautiful a girl really is by the way she looks.". A victor was decided`,
+                            `9After **私はあなたのカットが好きです**. A victor has been decided`
+                        ]
+                        if (user1.Inventory.includes("Wooden_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Kill`
+                            ]
+                        }
+                        if (user1.Inventory.includes("Riot_Shield")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Death`
+                                `Kill`
+                                `Kill`
+                            ]
+                        }
+                        if (user1.Inventory.includes("Anime_Body_Pillow")){
+                            Attack = [
+                                `Kill`,
+                                `Death`,
+                                `Death`,
+                                `Death`,
+                                `Kill`,
+                                `Death`,
+                                `Death`
+                                // `Kill`
+                            ]
+                        }
                     }
                     let option = Attack[Math.floor(Math.random() * Attack.length)]
                     if (option === "Kill"){
@@ -148,10 +232,12 @@ module.exports = class extends Command {
         }
         function Kill(){
             let muder = Deathz[Math.floor(Math.random() * Deathz.length)]
+            let intro2 = intro[Math.floor(Math.random() * intro.length)]
+            let intro3 = short[Math.floor(Math.random() * short.length)]
             let embed = new MessageEmbed()
-            .setTitle(`Its time to d-d-d-d-d-d duel`)
+            .setTitle(intro2)
             .setColor("RANDOM")
-            .setDescription(`In a long winded battle to the death \n *${muder}* \n **${user.Username}** Has Killed **${user1.Username}**`)
+            .setDescription(`${intro3} \n *${muder}* \n **${user.Username}** Has Killed **${user1.Username}**`)
             message.channel.send(embed)
             user.kill += 1
             user.money += 50
@@ -161,10 +247,12 @@ module.exports = class extends Command {
         }
         function Death(){
             let muder = Deathz[Math.floor(Math.random() * Deathz.length)]
+            let intro2 = intro[Math.floor(Math.random() * intro.length)]
+            let intro3 = short[Math.floor(Math.random() * short.length)]
             let embed = new MessageEmbed()
-            .setTitle(intro[Math.floor(Math.random() * intro.length)])
+            .setTitle(intro2)
             .setColor("RANDOM")
-            .setDescription(`In a long winded battle to the death \n *${muder}* \n **${user1.Username}** Has Killed **${user.Username}**`)
+            .setDescription(`${intro3} \n *${muder}* \n **${user1.Username}** Has Killed **${user.Username}**`)
             message.channel.send(embed)   
             user1.kill += 1
             user.money -= 50
