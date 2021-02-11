@@ -32,7 +32,7 @@ module.exports = class extends Command {
 			.addField('Battle Set', [
 				`**❯ $50,000:** Diamond Set (Id:4)`,
 				`**❯ $90,000:** Riot  Set (Id:5)`,
-				`**❯ $500,000:** ~~Anime Set~~ (Id:6)`,
+				`**❯ $500,000:** Anime Set (Id:6)`,
 			])
 			.setFooter(`Requested by ${message.author.username}`, message.author.displayAvatarURL({ dynamic: true }))
 			.setTimestamp();
@@ -156,7 +156,7 @@ module.exports = class extends Command {
 							user.Inventory.pull('Iron_Sword')
 						}
 						if (user.Inventory.includes('Glock-19')) {
-							user.Inventory.pull('Glock-19')
+							return message.channel.send(`You Own A **Glock-19** you dont need this item`)
 						}
 						user.Inventory.push('Diamond_Sword')
 						user.save()
@@ -190,6 +190,38 @@ module.exports = class extends Command {
 						message.channel.send(`${message.author.username} bought ID5`)
 					} else return	
 				})
+		}
+		function ID6(){
+			message.channel.send("Are You Sure /n `Yes` or `No`")
+			const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+			// console.log(collector)
+			collector.on('collect', message => {
+				if (message.content == "Yes") {
+					console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
+					user.money -=  90000
+					user.Tags.push('Store:Id6')
+					if (user.Inventory.includes('Iron_Sword')) {
+						user.Inventory.pull('Iron_Sword')
+					}
+					if (user.Inventory.includes('Diamond_Sword')) {
+						user.Inventory.pull('Diamond_Sword')
+					}
+					if (user.Inventory.includes('Glock-19')) {
+						user.Inventory.pull('Glock-19')
+					}
+					if (user.Inventory.includes('Wooden_Shield')) {
+						user.Inventory.pull('Wooden_Shield')
+					}
+					if (user.Inventory.includes('Riot_Shield')) {
+						user.Inventory.pull('Riot_Shield')
+					}
+					user.Inventory.push('Anime_Body_Pillow')
+					user.Inventory.push('Bakuzan')
+					user.save()
+					message.channel.bulkDelete(7)
+					message.channel.send(`${message.author.username} bought ID5`)
+				} else return	
+			})
 		}
 			function InfoID1 () {
 				Info.addField('Info', [
@@ -251,17 +283,19 @@ module.exports = class extends Command {
 				])
 				// message.channel.bulkDelete(7)
 				message.channel.send(Info)
-				console.log(`true`)
 		}
 			function InfoID6 () {
 				Info.addField('Info', [
 					`**❯ Cost:** $500,000`,
 					`**❯ ID:** 1`,
-					`**❯ Name:** Custom Command`
+					`**❯ Name:** Anime Set`
 				])
-
+				Info.addField('Unlocks', [
+					`**❯ Sword:** *Bakuzan*`,
+					`**❯ Shield:** *Anime_Body_Pillow*`,
+				])
 				message.channel.bulkDelete(7)
-				// message.channel.send(Info)
+				message.channel.send(Info)
 		}
 	}
 }
