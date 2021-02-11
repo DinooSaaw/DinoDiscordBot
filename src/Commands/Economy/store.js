@@ -191,14 +191,14 @@ module.exports = class extends Command {
 					} else return	
 				})
 		}
-		function ID6(){
+			function ID6(){
 			message.channel.send("Are You Sure /n `Yes` or `No`")
 			const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
 			// console.log(collector)
 			collector.on('collect', message => {
 				if (message.content == "Yes") {
 					console.log(chalk.hex('70bb65')('[Transaction] ') + chalk.magenta(`[${message.author.username}] `) + chalk.bold.white(`Money: $${user.money} Bank: $${user.bank}`))
-					user.money -=  90000
+					user.money -=  500000
 					user.Tags.push('Store:Id6')
 					if (user.Inventory.includes('Iron_Sword')) {
 						user.Inventory.pull('Iron_Sword')
@@ -219,7 +219,7 @@ module.exports = class extends Command {
 					user.Inventory.push('Bakuzan')
 					user.save()
 					message.channel.bulkDelete(7)
-					message.channel.send(`${message.author.username} bought ID5`)
+					message.channel.send(`${message.author.username} bought ID6`)
 				} else return	
 			})
 		}
