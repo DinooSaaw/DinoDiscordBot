@@ -17,24 +17,24 @@ module.exports = class DinoClient extends Client {
 
 		this.utils = new Util(this);
 
-		this.owners = options.owners;
+		this.owners = process.env.owners
 	}
 
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
 
-		if (!options.token) throw new Error('You must pass the token for the client.');
+		if (!process.env.TOKEN) throw new Error('You must pass the token for the client.');
 		this.token = options.token;
 
-		if (!options.prefix) throw new Error('You must pass a prefix for the client.');
+		if (!process.env.prefix) throw new Error('You must pass a prefix for the client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
 		
-		if (!options.defaultPerms) throw new Error('You must pass default perm(s) for the Client.');
+		if (!process.env.defaultPerms) throw new Error('You must pass default perm(s) for the Client.');
 		this.defaultPerms = new Permissions(options.defaultPerms).freeze();
 	}
 
-	async start(token = this.token) {
+	async start(token = process.env.TOKEN) {
 		this.utils.loadCommands();
 		this.utils.loadEvents();
 		
