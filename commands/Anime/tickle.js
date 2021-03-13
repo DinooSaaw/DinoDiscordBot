@@ -12,9 +12,8 @@ module.exports = {
   usage: "tickle <user>",
 	aliases: ['tickle'],
     category: "Anime",
-    run: async (client, message, args) => {
-		const member = message.mentions.members.last() || message.member;
-		let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
+    run: async (client, message) => {
+    let user = await DBUser.findOne({ id: member.user.id, Username: member.user.username });
 		if (!user) return message.channel.send(`**${member.user.username}** isnt in the system`)
 		let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)
