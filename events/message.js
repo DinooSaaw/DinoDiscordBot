@@ -4,6 +4,7 @@ const DBUser = require("../Mongoose/Schema/user");
 const moment = require("moment")
 
 module.exports.run = async (client, message) => {
+  // client.emit("guildCreate", message.guild)
   let user = await DBUser.findOne({ id: message.author.id});
   let guild = await DBGuild.findOne({ GuildId: message.guild.id});
 
