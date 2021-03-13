@@ -9,8 +9,7 @@ module.exports.run = async (client, member) => {
 	let welcomeChannnel = message.guild.channels.find(c => c.id === guild.welcomeChannel)
 	let logChannnel = message.guild.channels.find(c => c.id === guild.logChannel)
 
-	console.log(member)
-    const embed = new MessageEmbed()
+	const embed = new MessageEmbed()
 		.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 		.setColor(member.displayHexColor || guild.embedColor)
 		.addField('User Joined', [
