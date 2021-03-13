@@ -6,8 +6,8 @@ module.exports.run = async (client, member) => {
 	let guild = await DBGuild.findOne({ GuildId: member.guild.id});
 	if (!guild) return
 
-	let welcomeChannnel = message.guild.channels.find(c => c.id === guild.welcomeChannel)
-	let logChannnel = message.guild.channels.find(c => c.id === guild.logChannel)
+	let welcomeChannnel = member.guild.channels.cache.find(c => c.id === guild.welcomeChannel)
+	let logChannnel = member.guild.channels.cache.find(c => c.id === guild.logChannel)
 
 	const embed = new MessageEmbed()
 		.setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))

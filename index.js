@@ -15,5 +15,4 @@ client.aliases = new discord.Collection();
   require(`./handlers/${handler}`)(client);
 });
 
-
 client.login(process.env.token);
