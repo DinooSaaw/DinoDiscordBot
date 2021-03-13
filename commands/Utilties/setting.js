@@ -7,6 +7,7 @@ module.exports = {
       "Get guild's settings",
     usage: "settings <settings> <settings options>",
     category: "Utilties",
+    cooldown: 0,
     run: async (client, message, args) => {
         let dataguild = await DBGuild.findOne({ GuildId: message.guild.id});
         if (!dataguild){
@@ -21,6 +22,7 @@ module.exports = {
             `**❯ Guild-Color:** ${dataguild.embedColor}`,
             `**❯ Muted-Role:** <@&${dataguild.mutedRole}>`,
             `**❯ Log-Channel:** <#${dataguild.logChannel}>`,
+            `**❯ Welcome-Channel:** <#${dataguild.welcomeChannel}>`,
         ])
         .setFooter(`To change a setting use ${dataguild.prefix}settings <setting name> <new setting>`)
         
@@ -43,6 +45,12 @@ module.exports = {
             if(isNaN(logchannel)) return message.channel.send(`**Please # the log channel**`)
             dataguild.logChannel = logchannel
             message.channel.send(`**Log Channel Updated**`)
+            dataguild.save()
+        }else if (args[0] == "Welcome-Channel" || args[0] == "welcome-channel"){
+            let logchannel = args[1].replace(/\D/g,'');
+            if(isNaN(logchannel)) return message.channel.send(`**Please # the log channel**`)
+            dataguild.welcomeChannel = logchannel
+            message.channel.send(`**Welcome Channel Updated**`)
             dataguild.save()
         } else if (args[0] == "Guild-Color" || args[0] == "guild-color"){
             dataguild.embedColor = args[1]

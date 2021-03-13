@@ -15,6 +15,7 @@ const schema = mongoose.Schema({
     banmessageremove: { type: Number, default: 1 },
     embedColor: { type: String, default: "RANDOM"},
     mutedRole: { type: String, default: undefined},
-    logChannel: { type: String, default: undefined}
+    logChannel: { type: String, default: undefined},
+    welcomeChannel: { type: String, default: undefined}
 });
 module.exports = mongoose.model("Guild", schema)

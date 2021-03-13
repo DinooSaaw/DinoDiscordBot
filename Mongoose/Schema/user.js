@@ -6,9 +6,8 @@ const schema = mongoose.Schema({
     Avatar: String,
     Created: String,
     Xp: { type: Number, default: 0},
-    Money: { type: Number, default: 0},
-    Bank: { type: Number, default: 0},
-    Networth: { type: Number, default: 0},
+    money: { type: Number, default: 1500},
+    bank: { type: Number, default: 1500},
 
 });
 module.exports = mongoose.model("User", schema)

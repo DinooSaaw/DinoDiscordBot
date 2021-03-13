@@ -76,7 +76,7 @@ module.exports.run = async (client, message) => {
   if (!command) command = client.commands.get(client.aliases.get(cmd));
 
   if (!command) return;
-  let xcooldown = command.cooldown || 10
+  let xcooldown = command.cooldown || 5
   if (cooldowns.has(message.author)) {
     message.channel.bulkDelete(1)
     message.channel.send(`Chill out for **${xcooldown}**s`).then(msg => { msg.delete({ timeout: xcooldown * 1000});})
