@@ -28,7 +28,6 @@ module.exports = {
         .setColor(guild.embedColor)
         .setImage(slap.url);
         message.channel.send(embed);
-        console.log(message.channel)
     } else console.log("error");
   }
 };
