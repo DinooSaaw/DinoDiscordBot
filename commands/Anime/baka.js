@@ -27,7 +27,7 @@ module.exports = {
       .setColor(guild.embedColor)
       .setImage(slap.url);
       message.channel.send(embed);
-    } else console.log('error')
+    } else message.reply("mention someone!")
 
   }
 }
