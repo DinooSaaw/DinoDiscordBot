@@ -15,7 +15,7 @@ module.exports.run = (client) => {
 
   activities = [
     `My Code To The Cloud Server!`,
-    `My help command use ${env.process.prefix}help`,
+    `My help command use ${process.env.prefix}help`,
     `Life is beautiful… from Friday to Monday`,
     `Some people just need a High-Five on the face`,
     `I’m not sad about being single. Rather I’m thinking about my better half, who is single because of me`,
