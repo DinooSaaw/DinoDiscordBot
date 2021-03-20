@@ -13,6 +13,25 @@ module.exports.run = (client) => {
     (`[SYSTEM] `) + `${client.user.lastMessage}`,
   ].join('\n'));
 
+  const activities = [
+    `How was your day my good friend?`,
+    `Much love to you all :D`,
+  ];
+
+  const commandchan = [`serverinfo`, `settings`, `uptime`, `userinfo`, `help`];
+
+  const type = ["PLAYING", "LISTENING", "WATCHING"];
+
+  let i = 0;
+  setInterval(
+    () =>
+      client.user.setActivity(
+        `${process.env.prefix}${commandchan[i++ % commandchan.length]}
+        }`,
+        { type: `${type[i++ % type.length]}` }
+      ),
+    120000
+  );
     const Webhook = new MessageEmbed()
 		.setTitle(`${client.user.tag}`)
 		.setThumbnail(client.user.displayAvatarURL())
