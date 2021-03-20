@@ -13,33 +13,10 @@ module.exports.run = (client) => {
     (`[SYSTEM] `) + `${client.user.lastMessage}`,
   ].join('\n'));
 
-  activities = [
-    `My Code To The Cloud Server!`,
-    `My help command use ${process.env.prefix}help`,
-    `Life is beautiful… from Friday to Monday`,
-    `Some people just need a High-Five on the face`,
-    `I’m not sad about being single. Rather I’m thinking about my better half, who is single because of me`,
-    `I don’t care what others say or think about me, at least I am attractive to mosquitoes`,
-    `Parachute for sale, used once, never opened!`,
-    `Never make the same mistake twice; there are so many new ones to make`,
-    `My Pro Bot Game Play`,
-  ]
+  client.user.setPresence({ activity: { type: 'STREAMING', url: 'https://twitch.tv/dinoosaaw', name: 'My code' }, status: 'dnd' })
+  // .then(console.log)
+  .catch(console.error);
 
-  let i = 0;
-
-  setInterval(
-    () =>
-    client.user.setPresence({
-      game: { 
-          name: activities[i++ % activities.length],
-          type: 'STREAMING',
-    url: 'https://twitch.tv/dinoosaaw'
-      },
-      status: 'online'
-      
-  }),
-    120000
-  );
     const Webhook = new MessageEmbed()
 		.setTitle(`${client.user.tag}`)
 		.setThumbnail(client.user.displayAvatarURL())
