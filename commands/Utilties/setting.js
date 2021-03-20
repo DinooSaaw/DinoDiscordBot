@@ -17,18 +17,20 @@ module.exports = {
         .setTitle(`${message.guild.name}'s Settings`)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
 		.setColor(dataguild.embedColor)
-        .addField("Settings", [
+        .addField("General", [
             `**❯ Prefix:** ${dataguild.prefix}`,
             `**❯ Guild-Color:** ${dataguild.embedColor}`,
-            `**❯ Muted-Role:** <@&${dataguild.mutedRole}>`,
+        ])
+        .addField("Channels", [
             `**❯ Log-Channel:** <#${dataguild.logChannel}>`,
             `**❯ Welcome-Channel:** <#${dataguild.welcomeChannel}>`,
         ])
-        .setFooter(`To change a setting use ${dataguild.prefix}settings <setting name> <new setting>`)
+        .addField("Roles", [
+            `**❯ Muted-Role:** <@&${dataguild.mutedRole}>`,
+        ])
+        .setFooter(`To change a setting use ${dataguild.prefix}settings Prefix r/`)
         
         if (!args){
-            message.channel.send(settingmenu)
-        } else if (!args[1]){
             message.channel.send(settingmenu)
         } else if (args[0] == "prefix" || args[0] == "Prefix"){
             dataguild.prefix = args[1]
@@ -56,6 +58,8 @@ module.exports = {
             dataguild.embedColor = args[1]
             message.channel.send(`**Guild Color Updated**`)
             dataguild.save()
+        } else {
+            message.channel.send(settingmenu)
         }
 
     }
