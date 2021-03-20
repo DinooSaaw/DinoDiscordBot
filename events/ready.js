@@ -26,8 +26,7 @@ module.exports.run = (client) => {
   setInterval(
     () =>
       client.user.setActivity(
-        `${process.env.prefix}${commandchan[i++ % commandchan.length]}
-        }`,
+        `${process.env.prefix}${commandchan[i++ % commandchan.length]}`,
         { type: `${type[i++ % type.length]}` }
       ),
     120000
