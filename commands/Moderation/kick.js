@@ -10,7 +10,8 @@ module.exports = {
   run: async (client, message, args) => {
     let dataguild = await DBGuild.findOne({ GuildId: message.guild.id});
         
-  if(!message.member.hasPermission(["KICK_MEMBERS", "ADMINISTRATOR"])) return message.channel.send("You dont have permission to perform this command!")
+  if(!message.member.hasPermission(["KICK_MEMBERS"])) return message.channel.send("You dont have permission to perform this command!")
+  if(!client.guild.me.hasPermission(["KICK_MEMBERS"])) return message.channel.send("I dont have permission to perform this command!")
 
   let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]) 
   if(!kickMember) return message.channel.send("Please provide a user to kick!")

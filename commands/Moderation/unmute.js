@@ -15,6 +15,8 @@ module.exports = {
     let user = message.mentions.users.first() || message.guild.members.cache.get(args[1]);
     let reason = args.slice(1).join(' ');
     let member = message.guild.members.cache.get(user.id);
+    if(!message.member.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("You dont have permission to perform this command!")
+    if(!client.guild.me.hasPermission(["MANAGE_MESSAGES", "MANAGE_ROLES"])) return message.channel.send("I dont have permission to perform this command!")
     const logchannel = message.guild.channels.cache.find(ch => ch.id == result.logChannel);
     let MutedRole = message.guild.roles.cache.find(role => role.id === result.mutedRole)
     if (!member.roles.cache.find(r => r.id === result.mutedRole)) return message.channel.send(`<@!${user.id}> isnt already muted`);
