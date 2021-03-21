@@ -3,6 +3,6 @@ module.exports = {
   category: "Fun",
 run: async (client, message, args) => {
   
-    message.channel.send(`pong`)  
+    message.channel.send(`pong!`)  
 }
 }

@@ -25,7 +25,7 @@ module.exports = {
         .addField(`Money`, [
 			`**❯ Money:** $${user.money}`,
 			`**❯ Bank Account:** $${user.bank}`,
-			`**❯ Net Worth:** $${networth}`
+			`**❯ Net Worth:** $${networth}!`
 		])
         
 		message.channel.send(embed);
