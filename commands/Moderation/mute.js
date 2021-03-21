@@ -19,6 +19,7 @@ module.exports = {
     if(!client.guild.me.hasPermission(["MANAGE_MESSAGES", "MANAGE_ROLES"])) return message.channel.send("I dont have permission to perform this command!")
     const logchannel = message.guild.channels.cache.find(ch => ch.id == result.logChannel);
     let MutedRole = message.guild.roles.cache.find(role => role.id === result.mutedRole)
+    if(!member.manageable || !warnedRole.editable) return message.channel.send("I dont have permission to give that use that role!")
     if (member.roles.cache.find(r => r.id === result.mutedRole)) return message.channel.send(`<@!${user.id}> is already muted`);
     if (user.bot) return message.channel.send('You cannot mute bots');
     if (!result.mutedRole) return message.channel.send('You must setup a muted role in your server to use this command');
