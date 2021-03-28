@@ -27,7 +27,6 @@ module.exports.run = async (client, guild) => {
 			(`[DataBase] `) +
 			  `New Guild Created`
 		  );
-		  return
 	}else {
 		dataguild.currentlyIn = false
 		dataguild.save()
