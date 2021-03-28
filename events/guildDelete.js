@@ -10,6 +10,7 @@ module.exports.run = async (client, guild) => {
 	if (!dataguild) {
 		const Guild = new DBGuild({
 			_id: `Guild:${guild.name}`,
+			currentlyIn: false,
 			GuildName: guild.name,
 			Region: guild.region,
 			MemberCount: guild.memberCount,
@@ -28,7 +29,7 @@ module.exports.run = async (client, guild) => {
 		  );
 		  return
 	}else {
-		dataguild.currentlyIn == false
+		dataguild.currentlyIn = false
 		dataguild.save()
 	}
 	const webhookClient = new WebhookClient(process.env.webhookID, process.env.webhookToken);

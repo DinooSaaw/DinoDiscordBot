@@ -1,7 +1,9 @@
 const { MessageEmbed, WebhookClient } = require("discord.js");
 const DBGuild = require("../Mongoose/Schema/Guild");
 
-module.exports.run = async (client, guild) => { 
+
+module.exports.run = async (client, guild) => {
+
 	if (!process.env.webhookID) throw new Error(`webhookID is needed`)
 	if (!process.env.webhookToken) throw new Error(`webhookID is needed`)
 	let dataguild = await DBGuild.findOne({ GuildId: guild.id});
@@ -21,19 +23,23 @@ module.exports.run = async (client, guild) => {
 		  });
 		  Guild.save();
 		  console.log(
-			("3FA037")(`[DataBase] `) +
+			(`[DataBase] `) +
 			  `New Guild Created`
 		  );
 		  return
+	}else {
+		dataguild.currentlyIn = true
+		dataguild.save()
 	}
-	const webhookClient = new WebhookClient(process.env.webhookID, process.env.webhookToken);
 	
+	const webhookClient = new WebhookClient(process.env.webhookID, process.env.webhookToken);
+
         const Webhook = new MessageEmbed()
 		.setTitle(`${client.user.tag}`)
 		.setThumbnail(client.user.displayAvatarURL())
-		.setDescription(`Has Joined \n **${guild}**!`)
+		.setDescription(`Has been added to \n **${guild}**!`)
 		.setColor('GREEN')
 		
 		webhookClient.send(Webhook)
-		console.log((`[SYSTEM] `) + `Guild Join Message Sent`)
+		console.log((`[SYSTEM] `) + `Guild Added Message Sent`)
 	};
