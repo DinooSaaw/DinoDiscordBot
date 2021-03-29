@@ -19,7 +19,7 @@ module.exports = {
         let number = Math.floor(Math.random() * (100 - 1) + 1)
         let hint = Math.floor(Math.random() * (100 - 1) + 1)
         let Money = Number(Math.floor(Math.random() * (300 - 1) + 1))
-        let money = Money * user.multiplier
+        let money = Money
     
         // console.log(number)
         let embedA = new MessageEmbed()
@@ -31,6 +31,7 @@ module.exports = {
         collector.on('collect', message => {
             if (message.content == "high") {
                 if (hint < number){
+                    console.log(money)
                     embedA.setDescription(`**You won $${money}**`)
                     embedA.setColor(guild.embedColor)
                     embedA.setFooter(`Your hint is ${hint} The number was ${number}`)
@@ -50,6 +51,7 @@ module.exports = {
             }
             if (message.content == "low") {
                 if (hint > number){
+                    console.log(money)
                     embedA.setDescription(`**You won $${money}**`)
                     embedA.setColor(guild.embedColor)
                     embedA.setFooter(`Your hint is ${hint} The number was ${number}`)
@@ -69,6 +71,7 @@ module.exports = {
             }
             if (message.content == "jackpot") {
                 if (hint === number){
+                    console.log(money)
                     embedA.setDescription(`**You won $${money}**`)
                     embedA.setColor(guild.embedColor)
                     embedA.setFooter(`Your hint is ${hint} The number was ${number}`)

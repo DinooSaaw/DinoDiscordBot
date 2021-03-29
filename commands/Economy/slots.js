@@ -62,6 +62,7 @@ module.exports = {
             { slot: "👑 👑 👑", value: 360},
             { slot: "💰 ⭐ ⭐", value: 130},
             { slot: "⭐ ⭐ ⭐", value: 260},
+            { slot: "J A C K P O T", value: 500},
             ]
     
         let user = await DBUser.findOne({ id: message.author.id, Username: message.author.username });
@@ -70,7 +71,6 @@ module.exports = {
         let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)        
         let networth = user.money + user.bank;
-
         let option = slots[Math.floor(Math.random() * slots.length)]
         user.money -= 150
         let SlotsGame = new MessageEmbed()
