@@ -15,7 +15,7 @@ module.exports = {
         let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)
         if (user.money <= 0) return message.reply(`No Poor People Allowed Here`)
-        let networth = user.money + user.bank
+        usr.money -= 180
         let number = Math.floor(Math.random() * (100 - 1) + 1)
         let hint = Math.floor(Math.random() * (100 - 1) + 1)
         let Money = Number(Math.floor(Math.random() * (300 - 1) + 1))
