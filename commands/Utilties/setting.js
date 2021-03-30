@@ -20,6 +20,7 @@ module.exports = {
         .addField("General", [
             `**❯ Prefix:** ${dataguild.prefix}`,
             `**❯ Guild-Color:** ${dataguild.embedColor}`,
+            `**❯ Opt-in:** ${dataguild.optin}`,
         ])
         .addField("Channels", [
             `**❯ Log-Channel:** <#${dataguild.logChannel}>`,

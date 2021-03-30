@@ -11,6 +11,7 @@ const schema = mongoose.Schema({
     PremiumSubscriptionCount: Number,
     verified: Boolean,
     prefix: { type: String, default: process.env.prefix },
+    optin: { type: Boolean, default: true },
     currentlyIn: { type: Boolean, default: true },
     banmessageremove: { type: Number, default: 1 },
     embedColor: { type: String, default: "RANDOM"},
