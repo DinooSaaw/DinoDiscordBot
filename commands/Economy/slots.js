@@ -70,9 +70,9 @@ module.exports = {
         if (user.money <= 100) return message.reply(`No Poor People Allowed Here`);
         let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)        
-        let networth = user.money + user.bank;
         let option = slots[Math.floor(Math.random() * slots.length)]
         user.money -= 150
+        user.save()
         let SlotsGame = new MessageEmbed()
         .setTitle(`${message.author.username}'s Slots Game`)
         .setColor(`RANDOM`)

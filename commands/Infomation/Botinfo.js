@@ -23,8 +23,8 @@ module.exports = {
 				`**❯ Users:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
 				`**❯ Channels:** ${client.channels.cache.size.toLocaleString()}`,
 				`**❯ Creation Date:** ${utc(client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
-				'**❯ Discord Server:** https://discord.gg/5SmasyAn8b',
-				'**❯ GitHub:** https://github.com/DinooSaaw/DinoDiscordBot/tree/Heroku',
+				`**❯ Discord Server:** [Link](https://discord.gg/5SmasyAn8b)`,
+				'**❯ GitHub:** [Github Page](https://github.com/DinooSaaw/DinoDiscordBot/tree/Heroku)',
 				`**❯ Version:** v${version}`,
 				`**❯ Discord.js:** v${djsversion}`,
 				'\u200b'

@@ -21,9 +21,9 @@ module.exports = {
     .setColor(guild.embedColor)
     .setTitle(`Server Status`)
     .setDescription([
-      `**❯ Online** ${totalOnline.size}`,
-      `**❯ DnD** ${totalDnd.size}`,
-      `**❯ Idle** ${totalIdle.size}`
+      `**❯ Online** __${totalOnline.size}__`,
+      `**❯ DnD** __${totalDnd.size}__`,
+      `**❯ Idle** ${totalIdle.size}__`
     ])
     .setTimestamp()
     message.channel.send(embed);

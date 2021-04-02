@@ -60,11 +60,14 @@ module.exports = {
 				`**❯ Roles [${roles.length}]:** ${roles.length < 10 ? roles.join(', ') : roles.length > 10 ? this.client.utils.trimArray(roles) : 'None'}`,
 				`\u200b`
 			])
-			.addField('Info', [
-				`**❯ Bank Account:** $${user.bank}`,
-				`**❯ Money:** $${user.money}`,
-			]);
+			if (!user){
+				return
+			}else {
+				embed.addField('Info', [
+					`**❯ Bank Account:** $${user.bank}`,
+					`**❯ Money:** $${user.money}`,
+				]);
+			}
 		return message.channel.send(embed);
 	}
-
 };

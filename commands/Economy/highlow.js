@@ -23,12 +23,12 @@ module.exports = {
     
         let embedA = new MessageEmbed()
         .setTitle(`${message.author.username}'s High-Low Game`)
-        .setDescription(`A number secret between 1-100 has been chosen.\n Your hint is **${hint}**. \n Respond with "*high*", "*low*", or "*jackpot*".`)
+        .setDescription(`A secret number between 1-100 has been chosen.\n Your hint is **${hint}**. \n Respond with "*high*", "*low*", or "*jackpot*".`)
         .setFooter(`Choose whether you think the hidden number is higher, lower, or the same number as the hint`)
         message.channel.send(embedA)
         const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
         collector.on('collect', message => {
-            if (message.content == "high") {
+            if (message.content == "high" || message.content == "High") {
                 if (hint < number){
                     console.log(money)
                     embedA.setDescription(`**You won $${money}**`)
@@ -48,7 +48,7 @@ module.exports = {
                     collector.stop()
                 }
             }
-            if (message.content == "low") {
+            if (message.content == "low" || message.content == "Low") {
                 if (hint > number){
                     console.log(money)
                     embedA.setDescription(`**You won $${money}**`)
@@ -68,7 +68,7 @@ module.exports = {
                     collector.stop()
                 }
             }
-            if (message.content == "jackpot") {
+            if (message.content == "jackpot" || message.content == "Jackpot") {
                 if (hint === number){
                     console.log(money)
                     embedA.setDescription(`**You won $${money}**`)

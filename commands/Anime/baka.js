@@ -18,16 +18,12 @@ module.exports = {
 		let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)
     let slap = await sfw.baka();
-    let member = message.mentions.members.first()
     const args = message.content.trim().split(/ +/g);
         //if (!args[1]) return message.reply("mention someone!")
-    if (member) {
-      let embed = new MessageEmbed()
-      .setTitle(`BAKA!`)
-      .setColor(guild.embedColor)
-      .setImage(slap.url);
-      message.channel.send(embed);
-    } else message.reply("mention someone!")
-
+    let embed = new MessageEmbed()
+    .setTitle(`BAKA!`)
+    .setColor(guild.embedColor)
+    .setImage(slap.url);
+    message.channel.send(embed);
   }
 }
