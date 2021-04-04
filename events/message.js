@@ -60,12 +60,12 @@ module.exports.run = async (client, message) => {
     console.log(pre)
   }
 
-  if (!message.content.startsWith("~")) return;
+  if (!message.content.startsWith(guild.prefix)) return;
 
   if (!message.member) message.member = await message.guild.members.fetch(message);
 
   const args = message.content
-    .slice(1)
+    .slice(guild.prefix.length)
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
