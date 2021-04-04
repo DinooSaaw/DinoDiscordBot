@@ -22,7 +22,7 @@ module.exports = {
         msg.edit("Pinging...")
     }, 6000);
     setTimeout(() => {
-        msg.edit(`🏓Latency is ${Date.now() - message.createdTimestamp}ms. API Latency is ${Math.round(client.ws.ping)}ms`)
+        msg.edit(`🏓Latency is ${Date.now() - message.createdTimestamp - 7000}ms. API Latency is ${Math.round(client.ws.ping)}ms`)
     }, 7000); 
   }
 }
