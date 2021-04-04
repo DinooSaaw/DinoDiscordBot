@@ -11,7 +11,7 @@ module.exports = {
     let dataguild = await DBGuild.findOne({ GuildId: message.guild.id});
         
   if(!message.member.hasPermission(["KICK_MEMBERS"])) return message.channel.send("You dont have ` KICK_MEMBERS ` permission to perform this command!")
-  if(!client.guild.me.hasPermission(["KICK_MEMBERS"])) return message.channel.send("I dont have ` KICK_MEMBERS `permission to perform this command!")
+  // if(!message.client.hasPermission(["KICK_MEMBERS"])) return message.channel.send("I dont have ` KICK_MEMBERS `permission to perform this command!")
 
   let kickMember = message.mentions.members.first() || message.guild.members.get(args[0]) 
   if(!kickMember) return message.channel.send("Please provide a user to kick!")
@@ -22,7 +22,7 @@ module.exports = {
   if(!message.guild.me.hasPermission(["KICK_MEMBERS", "ADMINISTRATOR"])) return message.channel.send("I dont have permission to do this!")
 
   kickMember.send(`Hello, you have been kicked from ${message.guild.name} for: ${reason}`).then(() => 
-  kickMember.kick()).catch(err => console.log(err))
+  kickMember.kick(reason)).catch(err => console.log(err))
 
   message.channel.send(`**${kickMember.user.tag}** has been kicked`).then(m => m.delete(5000))
 

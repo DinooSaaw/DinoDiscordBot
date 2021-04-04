@@ -3,19 +3,17 @@ const DBGuild = require("../../Mongoose/Schema/Guild");
 
 
 module.exports = {
-    name: "mute",
+    name: "clear",
     description:
-      "Mute user from guild",
-    usage: "mute <user> <reason>",
+      "Clear Messages",
+    usage: "clear <number>",
     category: "Moderation",
     run: async (client, message, args) => {
     let embed2 = new MessageEmbed();
-    let amount = args[1]
+    let amount = args[0]
     let result = await DBGuild.findOne({ GuildId: message.guild.id});
-    let user = message.mentions.users.first() || message.guild.members.cache.get(args[1]);
-    let member = message.guild.members.cache.get(user.id);
     if(!message.member.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("You dont have ` MANAGE_MESSAGES ` permission to perform this command!")
-    if(!client.guild.me.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES ` permission to perform this command!")
+    // if(!message.client.user.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES ` permission to perform this command!")
     const logchannel = message.guild.channels.cache.find(ch => ch.id == result.logChannel);
     
     if (isNaN(amount) || amount < 2 || amount > 100) {
@@ -29,7 +27,7 @@ module.exports = {
     embed2.setTitle('Channel Cleared');
     embed2.setTimestamp();
     embed2.setColor(result.embedColor);
-    embed2.setDescription(`**User:** ${message.author}\n**User Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Location:** ${mesage.channel.name}`);
+    embed2.setDescription(`**User:** ${message.author}\n**User Tag:** ${message.author.tag}\n**User ID:** ${message.author.id}\n**Location:** ${message.channel.name}`);
     if (logchannel) logchannel.send(embed2);
 }
 };

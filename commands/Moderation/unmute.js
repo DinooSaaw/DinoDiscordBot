@@ -16,7 +16,7 @@ module.exports = {
     let reason = args.slice(1).join(' ');
     let member = message.guild.members.cache.get(user.id);
     if(!message.member.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("You dont have ` MANAGE_MESSAGES ` permission to perform this command!")
-    if(!client.guild.me.hasPermission(["MANAGE_MESSAGES", "MANAGE_ROLES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES or MANAGE_ROLES ` permission to perform this command!")  
+    // if(!message.client.hasPermission(["MANAGE_MESSAGES", "MANAGE_ROLES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES or MANAGE_ROLES ` permission to perform this command!")  
     const logchannel = message.guild.channels.cache.find(ch => ch.id == result.logChannel);
     let MutedRole = message.guild.roles.cache.find(role => role.id === result.mutedRole)
     if(!member.manageable || !warnedRole.editable) return message.channel.send("I dont have permission to remove that use that role!")

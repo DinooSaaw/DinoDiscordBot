@@ -2,7 +2,6 @@ const { MessageEmbed } = require('discord.js');
 const DBUser = require("../../Mongoose/Schema/user");
 const DBGuild = require("../../Mongoose/Schema/Guild");
 
-
 module.exports = {
     name: "balance",
     description:

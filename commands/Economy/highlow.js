@@ -27,6 +27,9 @@ module.exports = {
         .setFooter(`Choose whether you think the hidden number is higher, lower, or the same number as the hint`)
         message.channel.send(embedA)
         const collector = new MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+        collector.on('end', message => {
+          message.channel.send(`You Timed Out`)  
+        })
         collector.on('collect', message => {
             if (message.content == "high" || message.content == "High") {
                 if (hint < number){
@@ -88,6 +91,7 @@ module.exports = {
                     collector.stop()
                 }
             }	
+            
 })
 }
 }

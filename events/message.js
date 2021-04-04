@@ -60,12 +60,12 @@ module.exports.run = async (client, message) => {
     console.log(pre)
   }
 
-  if (!message.content.startsWith(guild.prefix)) return;
+  if (!message.content.startsWith("~")) return;
 
   if (!message.member) message.member = await message.guild.members.fetch(message);
 
   const args = message.content
-    .slice(guild.prefix.length)
+    .slice(1)
     .trim()
     .split(/ +/g);
   const cmd = args.shift().toLowerCase();
@@ -84,5 +84,5 @@ module.exports.run = async (client, message) => {
     return
   }
   if (command) command.run(client, message, args);
-  cooldown(message.author, xcooldown);
+  // cooldown(message.author, xcooldown);
 }
