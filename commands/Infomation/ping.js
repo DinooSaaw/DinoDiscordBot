@@ -1,5 +1,5 @@
 module.exports = {
-    name: "pong",
+    name: "ping",
     category: "Fun",
   run: async (client, message, args) => {
     let msg = await message.channel.send(`Pinging`)
