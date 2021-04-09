@@ -1,6 +1,7 @@
 
 module.exports.run = async (client, message) => {
 if (!message.guild.me.hasPermission("VIEW_AUDIT_LOG")) return
+
 // ignore direct messages
 if (!message.guild) return;
 const fetchedLogs = await message.guild.fetchAuditLogs({
