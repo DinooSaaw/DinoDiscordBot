@@ -4,8 +4,7 @@ module.exports.run = (client) => {
   if (!process.env.webhookID) throw new Error(`webhookID is needed`)
 	if (!process.env.webhookToken) throw new Error(`webhookID is needed`)
 	const webhookClient = new WebhookClient(process.env.webhookID, process.env.webhookToken);
-	const webhookClient2 = new WebhookClient("825699588576903189", "mb7dPrgJxbpCdjLkIknj9KBc6TVGNQhZbwcPzEz3bFMBOiSbAZlu9XX2uWZJAYicwTvR");
-  console.log([
+	console.log([
     (`[SYSTEM] `) + `Logged in as ${client.user.tag}`,
     (`[SYSTEM] `) + `In ${client.guilds.cache.size} Servers!`,
     (`[SYSTEM] `) + `In ${client.channels.cache.size} Channels!`,
