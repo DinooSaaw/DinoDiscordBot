@@ -31,6 +31,10 @@ module.exports = {
         ])
         .setFooter(`To change a setting use ${dataguild.prefix}settings Prefix r/`)
         
+        if(!message.member.hasPermission(["MANAGE_GUILD"])) {
+            settingmenu.setFooter(`To change a setting you must have the **Manage Server** Permission`)
+            message.channel.send(settingmenu)
+        }
         if (!args){
             message.channel.send(settingmenu)
         } else if (args[0] == "prefix" || args[0] == "Prefix"){
@@ -58,6 +62,11 @@ module.exports = {
         } else if (args[0] == "Guild-Color" || args[0] == "guild-color"){
             dataguild.embedColor = args[1]
             message.channel.send(`**Guild Color Updated**`)
+            dataguild.save()
+        } else if (args[0] == "optin" || args[0] == "Optin" || args[0] == "OptIn"){
+            if (!typeof args[1] === "boolean") return message.channel.send("Please Give `true` or `false`")
+            dataguild.embedColor = args[1]
+            message.channel.send(`**Opt-In Updated**`)
             dataguild.save()
         } else {
             message.channel.send(settingmenu)
