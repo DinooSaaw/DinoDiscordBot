@@ -13,7 +13,7 @@ module.exports = {
     let amount = args[0]
     let result = await DBGuild.findOne({ GuildId: message.guild.id});
     if(!message.member.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("You dont have ` MANAGE_MESSAGES ` permission to perform this command!")
-    // if(!message.client.user.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES ` permission to perform this command!")
+    if(!message.client.user.hasPermission(["MANAGE_MESSAGES"])) return message.channel.send("I dont have ` MANAGE_MESSAGES ` permission to perform this command!")
     const logchannel = message.guild.channels.cache.find(ch => ch.id == result.logChannel);
     
     if (isNaN(amount) || amount < 2 || amount > 100) {
