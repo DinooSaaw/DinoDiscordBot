@@ -12,7 +12,8 @@ module.exports.run = (client) => {
     (`[SYSTEM] `) + `${client.user.lastMessage}`,
   ].join('\n'));
 
-  client.user.setPresence({ activity: { type: 'STREAMING', url: 'https://twitch.tv/dinoosaaw', name: 'My code' }, status: 'dnd' })
+//   client.user.setPresence({ activity: { type: 'STREAMING', url: 'https://twitch.tv/dinoosaaw', name: 'My code' }, status: 'dnd' })
+  client.user.setPresence({ activity: { type: 'COMPETING', url: 'https://twitch.tv/dinoosaaw', name: 'Rawr' }, status: 'dnd' })
   // .then(console.log)
   .catch(console.error);
 
