@@ -38,8 +38,9 @@ module.exports = {
           inline: true,
         },
         { name: "\u200B", value: "\u200B" }
-      );
-
+      )
+      .setFooter(`Buy with !buy`)
+    
     if (!args) return message.channel.send(store);
     if (args[0] == "1" || args[0] == "one" || args[0] == "One") {
       one("Custom Guild Command", 500000);
