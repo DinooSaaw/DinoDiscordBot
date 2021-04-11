@@ -26,11 +26,11 @@ module.exports.run = (client) => {
 			`In **${client.guilds.cache.size}** Servers!`,
 			`In **${client.channels.cache.size}** Channels!`,
 			`Helping **${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}** Users!`,
-			// `Has ${client.shard.count} Shards!`,
-			`Has ${client.emojis.cache.size} Emojis!`,
-			`Commands: ${client.commands.size}`,
-			`Verified: ${client.user.verified}`,
-			`MFA: ${client.user.mfaEnabled}`,
+			// `Has **${client.shard.count}** Shards!`,
+			`Has **${client.emojis.cache.size}** Emojis!`,
+			`Commands: **${client.commands.size}**`,
+			`Verified: **${client.user.verified}**`,
+			`MFA: **${client.user.mfaEnabled}**`,
 		])
 		.setTimestamp()
 		.setColor('GREEN')
