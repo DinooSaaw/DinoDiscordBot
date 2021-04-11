@@ -8,6 +8,8 @@ module.exports.run = (client) => {
     (`[SYSTEM] `) + `Logged in as ${client.user.tag}`,
     (`[SYSTEM] `) + `In ${client.guilds.cache.size} Servers!`,
     (`[SYSTEM] `) + `In ${client.channels.cache.size} Channels!`,
+    (`[SYSTEM] `) + `Has ${client.emojis.cache.size} Emojis!`,
+    (`[SYSTEM] `) + `Has ${client.shard.count} Shards!`,
     (`[SYSTEM] `) + `${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} Users!`,
     (`[SYSTEM] `) + `${client.user.lastMessage}`,
   ].join('\n'));
@@ -24,6 +26,8 @@ module.exports.run = (client) => {
 			`In **${client.guilds.cache.size}** Servers!`,
 			`In **${client.channels.cache.size}** Channels!`,
 			`Helping **${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)}** Users!`,
+			`Has ${client.shard.count} Emojis!`,
+			`Has ${client.emojis.cache.size} Shards!`,
 			`Commands: ${client.commands.size}`,
 			`Verified: ${client.user.verified}`,
 			`MFA: ${client.user.mfaEnabled}`,
