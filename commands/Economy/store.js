@@ -19,7 +19,7 @@ module.exports = {
         .setTitle(`${message.client.user.username}'s Store`)
         .addFields(
             { name: '**1.** Custom Guild Command', value: '$__500,000__', inline: true },
-            { name: '**2.** Custom Global Command', value: '$__750,00__', inline: true },
+            { name: '**2.** Custom Global Command', value: '$__750,000__', inline: true },
             { name: '\u200B', value: '\u200B' },
         )
         .setFooter(`Buy with !buy <id>`)

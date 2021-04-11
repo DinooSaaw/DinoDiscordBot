@@ -13,10 +13,13 @@ const schema = mongoose.Schema({
     prefix: { type: String, default: process.env.prefix },
     optin: { type: Boolean, default: false },
     currentlyIn: { type: Boolean, default: true },
-    banmessageremove: { type: Number, default: 1 },
     embedColor: { type: String, default: "RANDOM"},
     mutedRole: { type: String, default: undefined},
     logChannel: { type: String, default: undefined},
-    welcomeChannel: { type: String, default: undefined}
+    welcomeChannel: { type: String, default: undefined},
+    welcomemsg: { type: String, default: "**${member.user.username}** Welcome to ***${member.guild.name}***"},
+    welcomeopt: { type: Boolean, default: true},
+    leaveopt: { type: Boolean, default: true},
+    leavemsg: { type: String, default: "**${member.user.username}** Has left ***${member.guild.name}*** welp"}
 });
 module.exports = mongoose.model("Guild", schema)

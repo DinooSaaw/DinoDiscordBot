@@ -34,7 +34,7 @@ module.exports = {
         },
         {
           name: "**2.** Custom Global Command",
-          value: "$__750,00__",
+          value: "$__750,000__",
           inline: true,
         },
         { name: "\u200B", value: "\u200B" }
