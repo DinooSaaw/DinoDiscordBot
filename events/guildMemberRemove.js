@@ -28,8 +28,8 @@ module.exports.run = async (client, member) => {
 	
 	if (!welcomeChannnel) return
 	if (!logChannnel) return
-	if (!guild.leaveopt) return
+	if (guild.leaveopt == false) return
 	
-	welcomeChannnel.send(guild.leavemsg)
+	welcomeChannnel.send(`**${member.user.username}** Has left ***${member.guild.name}*** welp`)
 	logChannnel.send(embed)
 }

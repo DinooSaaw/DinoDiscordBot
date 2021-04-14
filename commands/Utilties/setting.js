@@ -44,9 +44,7 @@ module.exports = {
             `**❯ Log-Channel:** <#${dataguild.logChannel}>`,
             `**❯ Welcome-Channel:** <#${dataguild.welcomeChannel}>`,
             `**❯ Welcome Message Opt-in:** ${dataguild.welcomeopt}`,
-            `**❯ Welcome Message :** \n ${messagefix(dataguild.welcomemsg)}`,
             `**❯ Leave Message Opt-in:** ${dataguild.leaveopt}`,
-            `**❯ Leave Message :** \n ${messagefix(dataguild.leavemsg)}`,
         ])
         .addField("Roles", [
             `**❯ Muted-Role:** <@&${dataguild.mutedRole}>`,
@@ -98,14 +96,6 @@ module.exports = {
         } else if (args[0] == "Leave Message Opt-in" || args[0] == "leave message opt-in" || args[0] == "Leave Message Optin" || args[0] == "leave message optin" ){
             if (!typeof args[1] === "boolean") return message.channel.send("Please Give `true` or `false`")
             dataguild.leaveopt = args[1]
-            message.channel.send(`**Leave Message Opt-in Updated**`)
-            dataguild.save()
-        } else if (args[0] == "Leave Message" || args[0] == "leave message") {
-            dataguild.leavemsg = msg()
-            message.channel.send(`**Leave Message Opt-in Updated**`)
-            dataguild.save()
-        } else if (args[0] == "Welcome Message" || args[0] == "welcome message") {
-            dataguild.welcomemsg = msg()
             message.channel.send(`**Leave Message Opt-in Updated**`)
             dataguild.save()
         } else {

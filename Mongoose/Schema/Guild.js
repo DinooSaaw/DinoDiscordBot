@@ -17,9 +17,7 @@ const schema = mongoose.Schema({
     mutedRole: { type: String, default: undefined},
     logChannel: { type: String, default: undefined},
     welcomeChannel: { type: String, default: undefined},
-    welcomemsg: { type: String, default: "**${member.user.username}** Welcome to ***${member.guild.name}***"},
     welcomeopt: { type: Boolean, default: true},
     leaveopt: { type: Boolean, default: true},
-    leavemsg: { type: String, default: "**${member.user.username}** Has left ***${member.guild.name}*** welp"}
 });
 module.exports = mongoose.model("Guild", schema)

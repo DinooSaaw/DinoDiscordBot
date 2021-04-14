@@ -28,8 +28,8 @@ module.exports.run = async (client, member) => {
 	
 	if (!welcomeChannnel) return
 	if (!logChannnel) return
-	if (!guild.welcomeopt) return
+	if (guild.welcomeopt == false) return
 	
-	welcomeChannnel.send(guild.welcomemsg)
+	welcomeChannnel.send(`**${member.user.username}** Welcome to ***${member.guild.name}***`)
 	logChannnel.send(embed)
 }
