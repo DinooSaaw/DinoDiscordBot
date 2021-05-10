@@ -15,11 +15,11 @@ module.exports = {
         let guild = await DBGuild.findOne({ GuildId: message.guild.id})
 		if (!guild) return message.channel.send(`Something when wrong!`)                
 
-        if (!args[1]) return message.channel.send('Please specify your cut.');
-        if (!args[2]) return message.channel.send('Please specify a total money pool.');
-        if (args[3]) return message.channel.send('Too many arguments.');
-        if (args[1] == '0') return message.channel.send(`Your cut cant be 0%. || ${replys[Math.floor(Math.random() * replys.length)]}`)
-        if (args[2] == '0') return message.channel.send(`Your total money cant be $0. ||${replys[Math.floor(Math.random() * replys.length)]}`)
+        if (!args[0]) return message.channel.send('Please specify your cut.');
+        if (!args[1]) return message.channel.send('Please specify a total money pool.');
+        if (args[2]) return message.channel.send('Too many arguments.');
+        if (args[0] == '0') return message.channel.send(`Your cut cant be 0%. || ${replys[Math.floor(Math.random() * replys.length)]}`)
+        if (args[1] == '0') return message.channel.send(`Your total money cant be $0. ||${replys[Math.floor(Math.random() * replys.length)]}`)
         var percentage = args[1]/100
         var money = percentage * args[2]
 
@@ -28,8 +28,8 @@ module.exports = {
         .setThumbnail(member.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setColor(guild.Colorembed)
 			.addField('Money', [
-				`**❯ ${message.author}'s Cut:** ${args[1]}%`,
-				`**❯ Total Player Money Pool:** $${args[2]}`,
+				`**❯ ${message.author}'s Cut:** ${args[0]}%`,
+				`**❯ Total Player Money Pool:** $${args[1]}`,
 				`**❯ ${message.author}'s Money:** $${money} `
 			])
 			.setTimestamp();
